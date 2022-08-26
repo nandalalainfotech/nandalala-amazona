@@ -14,6 +14,7 @@ export default function DashboardScreen() {
   }, [dispatch]);
   return (
     <div>
+    
       <div className="row">
         <h1>Dashboard</h1>
       </div>
@@ -40,6 +41,7 @@ export default function DashboardScreen() {
               </div>
               <div className="summary-body">
                 {summary.orders[0] ? summary.orders[0].numOrders : 0}
+                
               </div>
             </li>
             <li>
@@ -78,7 +80,7 @@ export default function DashboardScreen() {
           <div>
             <h2>Categories</h2>
             {summary.productCategories.length === 0 ? (
-              <MessageBox>No Category</MessageBox>
+              <MessageBox>No Category </MessageBox>
             ) : (
               <Chart
                 width="100%"
@@ -88,6 +90,7 @@ export default function DashboardScreen() {
                 data={[
                   ['Category', 'Products'],
                   ...summary.productCategories.map((x) => [x._id, x.count]),
+                  
                 ]}
               />
             )}

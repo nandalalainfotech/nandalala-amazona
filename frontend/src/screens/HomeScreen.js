@@ -3,11 +3,12 @@ import Product from '../components/Product';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { useDispatch, useSelector } from 'react-redux';
-import { listProducts } from '../constants/productAction';
+import { listProducts } from '../actions/productAction';
 import { listTopSellers } from '../actions/userAction';
 // import { Link } from 'react-router-dom';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
+import { Link } from 'react-router-dom';
 // import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 export default function HomeScreen() {
@@ -29,6 +30,7 @@ export default function HomeScreen() {
   }, [dispatch]);
   return (
     <div>
+
       <h2>Top Sellers</h2>
       {loadingSellers ? (
         <LoadingBox></LoadingBox>
@@ -39,15 +41,23 @@ export default function HomeScreen() {
           {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
 
           {sellers.map((seller) => (
+
             <div key={seller._id}>
+
               <div className="carousel-item">
-                <Carousel showArrows autoPlay showThumbs={true}>
+
+                <Carousel showArrows autoPlay showThumbs={false}>
                   {/* <Carousel showArrows active showThumbs={true}> */}
-                  {/* <Link to={`/seller/${seller._id}`}> */}
-                    <img className="d-block w-100" src="/image/p11.jpg" alt=""></img>
-                    <img className="d-block w-100" src="/image/p46.jpg" alt=""></img>
-                    <img className="d-block w-100" src="/image/p56.jpg" alt=""></img>
-                  {/* </Link> */}
+                  <Link to={`/seller/${seller._id}`}>
+                    <img src={"image/p8.jpg"} alt={seller.seller.name} />
+                    {/* <img className="d-block w-100" src="/image/p11.jpg" alt=""></img>
+                  <img className="d-block w-100" src="/image/p46.jpg" alt=""></img>
+                  <img className="d-block w-100" src="/image/p56.jpg" alt=""></img> */}
+                  </Link>
+                  <Link to={`/seller/${seller._id}`}>
+                    <img src={"image/p91.jpg"} alt={seller.seller.name} />
+                  </Link>
+
                 </Carousel>
               </div>
             </div>

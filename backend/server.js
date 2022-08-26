@@ -4,11 +4,13 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import userRouter from './routers/useRouter.js';
 import productRouter from './routers/productRouter.js';
+import sareeRouter from './routers/sareeRouter.js';
 import orderRouter from './routers/orderRouter.js';
 import path from 'path';
 import uploadRouter from './routers/uploadRouter.js';
 import http from 'http';
 import { Server } from 'socket.io';
+import data from './data.js';
 
 dotenv.config();
 
@@ -28,6 +30,7 @@ app.use(cors());
 app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
+app.use('/api/saree', sareeRouter);
 app.use('/api/orders', orderRouter);
 app.get('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
@@ -38,7 +41,7 @@ app.get('/api/config/google', (req, res) => {
 });
 
 const __dirname = path.resolve();
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+ app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 app.use(express.static(path.join(__dirname, '/frontend/build')));
 app.get('*', (req, res) =>

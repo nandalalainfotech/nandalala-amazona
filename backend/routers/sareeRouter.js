@@ -1,13 +1,13 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
-import Product from '../Models/productModel.js';
+import saree from '../Models/sareeModel.js';
 import { isAdmin, isAuth, isSellerOrAdmin } from '../utils.js';
 import User from '../Models/userModel.js';
 
-const productRouter = express.Router();
+const sareeRouter = express.Router();
 
-productRouter.get(
+sareeRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
     const pageSize = 3;
@@ -42,15 +42,15 @@ productRouter.get(
           : order === 'toprated'
             ? { rating: -1 }
             : { _id: -1 };
-    const count = await Product.count({
+    const count = await saree.count({
       ...sellerFilter,
       ...nameFilter,
      ...categoryFilter,
       ...priceFilter,
       ...ratingFilter,
     });
-    // const products = await Product.find({ ...sellerFilter });
-    const products = await Product.find({
+    // const sarees = await saree.find({ ...sellerFilter });
+    const sarees = await saree.find({
         ...sellerFilter,
         ...nameFilter,
          ...categoryFilter,
@@ -59,37 +59,37 @@ productRouter.get(
       })
         .populate('seller', 'seller.name seller.logo')
     //     .sort(sortOrder);
-    //   res.send(products);
+    //   res.send(sarees);
         .sort(sortOrder)
         .skip(pageSize * (page - 1))
         .limit(pageSize);
-      res.send({ products, page, pages: Math.ceil(count / pageSize) });
+      res.send({ sarees, page, pages: Math.ceil(count / pageSize) });
     })
   );
    
 
-productRouter.get(
+sareeRouter.get(
   '/categories',
   expressAsyncHandler(async (req, res) => {
-    const categories = await Product.find().distinct('category');
+    const categories = await saree.find().distinct('category');
     res.send(categories);
   })
 );
 
-productRouter.get(
+sareeRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
-    await Product.remove({});
-    // const createdProducts = await Product.insertMany(data.products);
-    // res.send({ createdProducts });
+    await saree.remove({});
+    // const createdsarees = await saree.insertMany(data.sarees);
+    // res.send({ createdsarees });
     const seller = await User.findOne({ isSeller: true });
     if (seller) {
-      const products = data.products.map((product) => ({
-        ...product,
+      const sarees = data.sarees.map((saree) => ({
+        ...saree,
         seller: seller._id,
       }));
-      const createdProducts = await Product.insertMany(products);
-      res.send({ createdProducts });
+      const createdsarees = await saree.insertMany(sarees);
+      res.send({ createdsarees });
     } else {
       res
         .status(500)
@@ -98,29 +98,29 @@ productRouter.get(
   })
 );
 
-productRouter.get(
+sareeRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
-    // const product = await Product.findById(req.params.id);
-    const product = await Product.findById(req.params.id).populate(
+    // const saree = await saree.findById(req.params.id);
+    const saree = await saree.findById(req.params.id).populate(
       'seller',
       'seller.name seller.logo seller.rating seller.numReviews'
     );
-    if (product) {
-      res.send(product);
+    if (saree) {
+      res.send(saree);
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: 'saree Not Found' });
     }
   })
 );
 
-productRouter.post(
+sareeRouter.post(
   '/',
   isAuth,
   isAdmin,
   isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
-    const product = new Product({
+    const saree = new saree({
       name: 'sample name ' + Date.now(),
       seller: req.user._id,
       image: '/image/p1.jpg',
@@ -132,57 +132,56 @@ productRouter.post(
       numReviews: 0,
       description: 'sample description',
     });
-    const createdProduct = await product.save();
-    res.send({ message: 'Product Created', product: createdProduct });
+    const createdsaree = await saree.save();
+    res.send({ message: 'saree Created', saree: createdsaree });
   })
 );
-productRouter.put(
+sareeRouter.put(
   '/:id',
   isAuth,
   isAdmin,
   isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
-    const productId = req.params.id;
-    const product = await Product.findById(productId);
-    if (product) {
-      product.name = req.body.name;
-      product.price = req.body.price;
-      product.image = req.body.image;
-      // product.images = req.body.images;
-       product.category = req.body.category;
-      product.brand = req.body.brand;
-      product.countInStock = req.body.countInStock;
-      product.description = req.body.description;
-      const updatedProduct = await product.save();
-      res.send({ message: 'Product Updated', product: updatedProduct });
+    const sareeId = req.params.id;
+    const saree = await saree.findById(sareeId);
+    if (saree) {
+      saree.name = req.body.name;
+      saree.price = req.body.price;
+      saree.image = req.body.image;
+       saree.category = req.body.category;
+      saree.brand = req.body.brand;
+      saree.countInStock = req.body.countInStock;
+      saree.description = req.body.description;
+      const updatedsaree = await saree.save();
+      res.send({ message: 'saree Updated', saree: updatedsaree });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: 'saree Not Found' });
     }
   })
 );
-productRouter.delete(
+sareeRouter.delete(
   '/:id',
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
-    if (product) {
-      const deleteProduct = await product.remove();
-      res.send({ message: 'Product Deleted', product: deleteProduct });
+    const saree = await saree.findById(req.params.id);
+    if (saree) {
+      const deletesaree = await saree.remove();
+      res.send({ message: 'saree Deleted', saree: deletesaree });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: 'saree Not Found' });
     }
   })
 );
 
-productRouter.post(
+sareeRouter.post(
   '/:id/reviews',
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    const productId = req.params.id;
-    const product = await Product.findById(productId);
-    if (product) {
-      if (product.reviews.find((x) => x.name === req.user.name)) {
+    const sareeId = req.params.id;
+    const saree = await saree.findById(sareeId);
+    if (saree) {
+      if (saree.reviews.find((x) => x.name === req.user.name)) {
         return res
           .status(400)
           .send({ message: 'You already submitted a review' });
@@ -192,20 +191,20 @@ productRouter.post(
         rating: Number(req.body.rating),
         comment: req.body.comment,
       };
-      product.reviews.push(review);
-      product.numReviews = product.reviews.length;
-      product.rating =
-        product.reviews.reduce((a, c) => c.rating + a, 0) /
-        product.reviews.length;
-      const updatedProduct = await product.save();
+      saree.reviews.push(review);
+      saree.numReviews = saree.reviews.length;
+      saree.rating =
+        saree.reviews.reduce((a, c) => c.rating + a, 0) /
+        saree.reviews.length;
+      const updatedsaree = await saree.save();
       res.status(201).send({
         message: 'Review Created',
-        review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
+        review: updatedsaree.reviews[updatedsaree.reviews.length - 1],
       });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: 'saree Not Found' });
     }
   })
 );
 
-export default productRouter;
+export default sareeRouter;

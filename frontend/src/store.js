@@ -5,7 +5,7 @@ import { cartReducer } from './reducers/cartReducers';
 import { orderCreateReducer, orderDeleteReducer, orderDeliverReducer, orderDetailsReducer, orderListReducer, orderMineListReducer, orderPayReducer, orderSummaryReducer } from './reducers/orderReducers';
 import { productCategoryListReducer, productCreateReducer, productDeleteReducer, productDetailsReducer, productListReducer, productReviewCreateReducer, productUpdateReducer } from './reducers/productReducers';
 import { userAddressMapReducer, userDeleteReducer, userDetailsReducer, userListReducer, userRegisterReducer, userSigninReducer, userTopSellerListReducer, userUpdateProfileReducer, userUpdateReducer } from './reducers/userReducers';
-
+import { SareeListReducer, SareeDetailsReducer } from './reducers/sareeReducer';
 const initialState = {
   userSignin: {
     userInfo: localStorage.getItem('userInfo')
@@ -16,10 +16,10 @@ const initialState = {
     cartItems: localStorage.getItem('cartItems')
       ? JSON.parse(localStorage.getItem('cartItems'))
       : [],
-      shippingAddress: localStorage.getItem('shippingAddress')
+    shippingAddress: localStorage.getItem('shippingAddress')
       ? JSON.parse(localStorage.getItem('shippingAddress'))
       : {},
-      paymentMethod: 'PayPal',
+    paymentMethod: 'PayPal',
   },
 };
 const reducer = combineReducers({
@@ -49,6 +49,9 @@ const reducer = combineReducers({
   productReviewCreate: productReviewCreateReducer,
   userAddressMap: userAddressMapReducer,
   orderSummary: orderSummaryReducer,
+  sareeReducer: SareeListReducer,
+  sareeDetails: SareeDetailsReducer,
+
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

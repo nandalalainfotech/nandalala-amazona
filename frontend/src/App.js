@@ -16,6 +16,7 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import SigninScreen from "./screens/SigninScreen";
 import AdminRoute from "./components/AdminRoute";
 import ProductListScreen from "./screens/ProductListScreen";
+import SareeListScreen from "./screens/SareeListScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import OrderListScreen from "./screens/OrderListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
@@ -24,7 +25,8 @@ import SellerRoute from "./components/SellerRoute";
 import SellerScreen from "./screens/SellerScreen";
 import SearchBox from "./components/SearchBox";
 import SearchScreen from "./screens/SearchScreen";
-import { listProductCategories } from './constants/productAction';
+import { listProductCategories } from './actions/productAction';
+// import { listSareeCategories } from './actions/sareeAction';
 import MessageBox from "./components/MessageBox";
 import LoadingBox from "./components/LoadingBox";
 import MapScreen from "./screens/MapScreen";
@@ -33,9 +35,6 @@ import ChatBox from "./components/ChatBox";
 import SupportScreen from "./screens/SupportScreen";
 import SareeScreen from "./screens/SareeScreen";
 import BookScreen from "./screens/BookScreen";
-
-
-
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -47,11 +46,6 @@ function App() {
   const signoutHandler = () => {
     dispatch(signout());
   };
-
-
-
-
-
   const productCategoryList = useSelector((state) => state.productCategoryList);
   const {
     loading: loadingCategories,
@@ -62,10 +56,16 @@ function App() {
     dispatch(listProductCategories());
   }, [dispatch]);
 
+  // const SareeCategoryList = useSelector((state) => state.SareeCategoryList);
+  // const {
+  //   loading: loadingCategories,
+  //   error: errorCategories,
+  //   categories,
+  // } = SareeCategoryList;
+  // useEffect(() => {
+  //   dispatch(listSareeCategories());
+  // }, [dispatch]);
   return (
-
-
-
     <BrowserRouter>
       <div className="grid-container">
         <header className="row">
@@ -84,10 +84,17 @@ function App() {
           <div>
             <SearchBox />
           </div>
-          {userInfo && userInfo.isAdmin && (
-            <div className="dropdown1">
+          <div className="dropdownlist">
+            <Link to="/cart">
+              <i className="fa fa-shopping-cart"></i>&nbsp;Cart
+              {cartItems.length > 0 && (
+                <span className="badge">{cartItems.length}</span>
+              )}
+            </Link>
+            {userInfo && userInfo.isAdmin && (
+
               <div className="dropdown">
-                <Link to="menu">
+                <Link to="#menu">
                   Menu <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content">
@@ -97,28 +104,12 @@ function App() {
                   <li>
                     <Link to="/book">Books</Link>
                   </li>
-                  {/* <li>
-                    <Link to="/menu/saree">Electronics</Link>
-                  </li> */}
-                  {/* <li>
-                    <Link to="/userlist">Users</Link>
-                  </li>
-                  <li>
-                    <Link to="/support">Support</Link>
-                  </li> */}
+
                 </ul>
               </div>
-            </div>
 
-          )}
-          <div>
-            <Link to="/cart">
-              <i className="fa fa-shopping-cart"></i>&nbsp;Cart
-              {cartItems.length > 0 && (
-                <span className="badge">{cartItems.length}</span>
-              )}
-            </Link>
 
+            )}
             {userInfo ? (
               <div className="dropdown">
                 <Link to="#">
@@ -180,7 +171,6 @@ function App() {
                 </ul>
               </div>
             )}
-
           </div>
         </header>
         <aside className={sidebarIsOpen ? 'open' : ''}>
@@ -211,6 +201,22 @@ function App() {
                 </li>
               ))
             )}
+            {/* {loadingCategories ? (
+              <LoadingBox></LoadingBox>
+            ) : errorCategories ? (
+              <MessageBox variant="danger">{errorCategories}</MessageBox>
+            ) : (
+              categories.map((c) => (
+                <li key={c}>
+                  <Link
+                    to={`/search/category/${c}`}
+                    onClick={() => setSidebarIsOpen(false)}
+                  >
+                    {c}
+                  </Link>
+                </li>
+              ))
+            )} */}
           </ul>
         </aside>
         <main>
@@ -326,11 +332,40 @@ function App() {
                 </AdminRoute>
               }
             />
+             {/* <Route
+              path="/Saree/:id"
+              element={<SareeScreen />}
+              exact
+            ></Route> */}
+            <Route
+              path="/Saree"
+              element={
+                <AdminRoute>
+                  <SareeScreen />exact
+                </AdminRoute>
+              }
+            />
+             <Route
+              path="/Sareelist/pageNumber/:pageNumber"
+              element={
+                <AdminRoute>
+                  <SareeListScreen />
+                </AdminRoute>
+              }
+            />
             <Route
               path="/book"
               element={
                 <AdminRoute>
                   <BookScreen />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/productlist/pageNumber/:pageNumber"
+              element={
+                <AdminRoute>
+                  <ProductListScreen />
                 </AdminRoute>
               }
             />

@@ -2,55 +2,56 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "../../node_modules/react-router-dom/index";
 import {
-  createProduct,
-  deleteProduct,
-  listProducts,
-} from "../actions/productAction";
+  createSaree,
+  deleteSaree,
+  listsaree,
+} from "../actions/sareeAction";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import {
-  PRODUCT_CREATE_RESET,
-  PRODUCT_DELETE_RESET,
-} from "../constants/productConstants";
+  SAREE_CREATE_RESET,
+  SAREE_DELETE_RESET,
+} from "../constants/sareeConstants";
 import { Link } from "react-router-dom";
 
-export default function ProductListScreen(props) {
+
+export default function SareeListScreen(props) {
   const navigate = useNavigate();
   const { pageNumber = 1 } = useParams();
   const { pathname } = useLocation();
   const sellerMode = pathname.indexOf('/seller') >= 0;
-  const productList = useSelector((state) => state.productList);
-  const { loading, error, products, page, pages } = productList;
-  const productCreate = useSelector((state) => state.productCreate);
+  const SareeList = useSelector((state) => state.SareeList);
+  const { loading, error, SAREEs, page, pages } = SareeList;
+  const SareeCreate = useSelector((state) => state.SareeCreate);
   const {
     loading: loadingCreate,
     error: errorCreate,
     success: successCreate,
-    product: createdProduct,
-  } = productCreate;
-  const productDelete = useSelector((state) => state.productDelete);
+    Saree: createdSaree,
+  } = SareeCreate;
+  const SareeDelete = useSelector((state) => state.SareeDelete);
   const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
-  } = productDelete;
+  } = SareeDelete;
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
   useEffect(() => {
     if (successCreate) {
-      dispatch({ type: PRODUCT_CREATE_RESET });
-      navigate(`/product/${createdProduct._id}/edit`);
+      dispatch({ type: SAREE_CREATE_RESET });
+      navigate(`/Saree/${createdSaree._id}/edit`);
     }
     if (successDelete) {
-      dispatch({ type: PRODUCT_DELETE_RESET });
+      dispatch({ type: SAREE_DELETE_RESET });
     }
     dispatch(
-      listProducts({ seller: sellerMode ? userInfo._id : '', pageNumber })
+      listsaree({ seller: sellerMode ? userInfo._id : '', pageNumber })
     );
   }, [
-    createdProduct,
+    createdSaree,
     dispatch,
     navigate,
     sellerMode,
@@ -59,20 +60,20 @@ export default function ProductListScreen(props) {
     userInfo._id,
     pageNumber,
   ]);
-  const deleteHandler = (product) => {
+  const deleteHandler = (Saree) => {
     if (window.confirm("Are you sure to delete?")) {
-      dispatch(deleteProduct(product._id));
+      dispatch(deleteSaree(Saree._id));
     }
   };
   const createHandler = () => {
-    dispatch(createProduct());
+    dispatch(createSaree());
   };
   return (
     <div>
       <div className="row">
-        <h1>Products</h1>
+        <h1>Saree</h1>
         <button type="button" className="primary" onClick={createHandler}>
-          Create Product
+          Create Saree
         </button>
       </div>
       {loadingDelete && <LoadingBox></LoadingBox>}
@@ -97,19 +98,19 @@ export default function ProductListScreen(props) {
               </tr>
               </thead>
             <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product._id}</td>
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
-                  <td>{product.category}</td>
-                  <td>{product.brand}</td>
+              {SAREEs.map((Saree) => (
+                <tr key={Saree._id}>
+                  <td>{Saree._id}</td>
+                  <td>{Saree.name}</td>
+                  <td>{Saree.price}</td>
+                  <td>{Saree.category}</td>
+                  <td>{Saree.brand}</td>
                   <td>
                     <button
                       type="button"
                       className="small"
                       onClick={() =>
-                        navigate(`/product/${product._id}/edit`)
+                        navigate(`/Saree/${Saree._id}/edit`)
                       }
                     >
                       Edit
@@ -117,7 +118,7 @@ export default function ProductListScreen(props) {
                     <button
                       type="button"
                       className="small"
-                      onClick={() => deleteHandler(product)}
+                      onClick={() => deleteHandler(Saree)}
                     >
                       Delete
                     </button>
@@ -131,7 +132,7 @@ export default function ProductListScreen(props) {
               <Link
                 className={x + 1 === page ? 'active' : ''}
                 key={x + 1}
-                to={`/productlist/pageNumber/${x + 1}`}
+                to={`/Sareelist/pageNumber/${x + 1}`}
               >
                 {x + 1}
               </Link>

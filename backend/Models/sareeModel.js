@@ -14,12 +14,11 @@ const reviewSchema = new mongoose.Schema(
 );
 
 
-const productSchema = new mongoose.Schema(
+const sareeSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, unique: true },
     seller: { type: mongoose.Schema.Types.ObjectID, ref: 'User' },
     image: { type: String, required: true },
-    // images: [String],
     brand: { type: String, required: true },
     category: { type: String, required: true },
     description: { type: String, required: true },
@@ -35,6 +34,6 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-const Product = mongoose.model('Product', productSchema);
+const saree = mongoose.model('saree', sareeSchema);
 
-export default Product;
+export default saree;

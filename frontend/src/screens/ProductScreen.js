@@ -4,8 +4,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Rating from "../components/Rating";
-import { createReview, detailsProduct } from "../constants/productAction";
+import { createReview, detailsProduct } from "../actions/productAction";
 import { PRODUCT_REVIEW_CREATE_RESET } from "../constants/productConstants";
+import Row from "react-bootstrap/Row";
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
@@ -27,7 +32,7 @@ export default function ProductScreen(props) {
 
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
-
+  // const [selectedImage, setSelectedImage] = useState('');
   useEffect(() => {
     if (successReviewCreate) {
       window.alert('Review Submitted Successfully');
@@ -36,7 +41,7 @@ export default function ProductScreen(props) {
       dispatch({ type: PRODUCT_REVIEW_CREATE_RESET });
     }
     dispatch(detailsProduct(productId));
-  }, [dispatch, productId,  successReviewCreate]);
+  }, [dispatch, productId, successReviewCreate]);
   const addToCartHandler = () => {
     navigate(`/cart/${productId}?qty=${qty}`);
   };
@@ -79,6 +84,24 @@ export default function ProductScreen(props) {
                   ></Rating>
                 </li>
                 <li>Pirce : ${product.price}</li>
+                {/* <ListGroup.Item>
+                  <Row xs={1} md={2} className="g-2">
+                    {[product.image, ...product.images].map((x) => (
+                      <Col key={x}>
+                        <Card>
+                          <Button
+                            className="thumbnail"
+                            type="button"
+                            variant="light"
+                            onClick={() => setSelectedImage(x)}
+                          >
+                            <Card.Img variant="top" src={x} alt="product" />
+                          </Button>
+                        </Card>
+                      </Col>
+                    ))}
+                  </Row>
+                </ListGroup.Item> */}
                 <li>
                   Description:
                   <p>{product.description}</p>

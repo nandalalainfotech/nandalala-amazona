@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from 'axios';
-import { detailsProduct, updateProduct } from "../constants/productAction";
+import { detailsProduct, updateProduct } from "../actions/productAction";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import {
@@ -9,6 +9,7 @@ import {
   useParams,
 } from "../../node_modules/react-router-dom/index";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
+
 
 export default function ProductEditScreen(props) {
   const navigate = useNavigate();
@@ -21,7 +22,6 @@ export default function ProductEditScreen(props) {
   const [countInStock, setCountInStock] = useState("");
   const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
-
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
   const productUpdate = useSelector((state) => state.productUpdate);
@@ -66,10 +66,10 @@ export default function ProductEditScreen(props) {
   };
   const [loadingUpload, setLoadingUpload] = useState(false);
   const [errorUpload, setErrorUpload] = useState('');
-
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const uploadFileHandler = async (e) => {
+    console.log("xxx",e);
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append('image', file);
@@ -82,6 +82,7 @@ export default function ProductEditScreen(props) {
         },
       });
       setImage(data);
+      console.log("iii.....", setImage);
       setLoadingUpload(false);
     } catch (error) {
       setErrorUpload(error.message);
