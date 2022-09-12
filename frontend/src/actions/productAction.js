@@ -162,6 +162,3 @@ export const createReview =
       dispatch({ type: PRODUCT_REVIEW_CREATE_FAIL, payload: message });
     }
   };
-
-
-  

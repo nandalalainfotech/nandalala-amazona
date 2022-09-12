@@ -14,6 +14,7 @@ export default function SellerScreen(props) {
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
+  
 
   const productList = useSelector((state) => state.productList);
   const {
@@ -25,7 +26,7 @@ export default function SellerScreen(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(detailsUser(sellerId));
-    dispatch(listProducts({ seller: sellerId }));
+    dispatch(listProducts({ sellerId: sellerId }));
   }, [dispatch, sellerId]);
   return (
     <div className="row top">

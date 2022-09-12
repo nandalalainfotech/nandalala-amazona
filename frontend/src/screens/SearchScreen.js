@@ -15,7 +15,7 @@ export default function SearchScreen(props) {
     min = 0,
     max = 0,
     rating = 0,
-    order = 'newest',
+    order = '',
     pageNumber = 1,
   } = useParams();
   const dispatch = useDispatch();
@@ -61,7 +61,7 @@ export default function SearchScreen(props) {
         ) : (
           <div>{products.length} Results</div>
         )}
-            <div>
+        <div>
           Sort by{' '}
           <select
             value={order}
@@ -110,7 +110,7 @@ export default function SearchScreen(props) {
           <div>
             <h3>Price</h3>
             <ul>
-            {prices.map((p) => (
+              {prices.map((p) => (
                 <li key={p.name}>
                   <Link
                     to={getFilterUrl({ min: p.min, max: p.max })}
@@ -118,12 +118,12 @@ export default function SearchScreen(props) {
                       `${p.min}-${p.max}` === `${min}-${max}` ? 'active' : ''
                     }
                   >
-                  {p.name}
+                    {p.name}
                   </Link>
                 </li>
               ))}
             </ul>
-            </div>
+          </div>
           <div>
             <h3>Avg. Customer Review</h3>
             <ul>
