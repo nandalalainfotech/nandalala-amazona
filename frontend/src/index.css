@@ -32,6 +32,8 @@ body {
 header {
   grid-area: header;
   background-color: #203040;
+
+
 }
 
 main {
@@ -43,6 +45,7 @@ footer {
   grid-area: footer;
   background-color: #203040;
   color: #ffffff;
+
 }
 
 /* Common */
@@ -214,6 +217,7 @@ aside li {
 
 button.close-sidebar {
   padding: 0.3rem 0.8rem;
+  background-color: white;
 }
 
 /* Image */
@@ -332,26 +336,18 @@ img.large {
   display: inline-block;
   position: relative;
 }
-
-.dropdownlist {
-  margin-right: 19px;
- 
-}
-
-
 .dropdown-content {
   position: absolute;
   display: none;
-  right: 1;
-  min-width: 100%;
-  
+  right: 0;
+  min-width: 12rem;
+  padding: 1rem;
   z-index: 1;
   background-color: #203040;
- padding-bottom: 1rem;
+  margin: 0;
   margin-top: 0.4rem;
   border-radius: 0.5rem;
 }
-
 .dropdown:hover .dropdown-content {
   display: block;
 }
@@ -389,18 +385,20 @@ img.large {
 
 .table button {
   margin: 0 0.2rem;
+  background-color: white;
 }
 
 /* Carousel */
 .carousel .slide img {
-  max-width: 30rem; 
+  max-width: 30rem;
 }
-  /* border-radius: 10px;  */
+
+/* border-radius: 10px;  */
 /*  
   margin: 1px;
  
   /* cursor: pointer; */
-  /* background-color: rgb(161, 59, 59);
+/* background-color: rgb(161, 59, 59);
   border: 2px solid rgb(209, 188, 188);
   background-color: rgb(160, 28, 28);
   border-radius: 10px
@@ -408,8 +406,8 @@ img.large {
 .carousel.dot:hover{
   background-color: #720a0a;
 
-} */ */
-
+} */
+*/
 
 /* Search */
 .search button {
@@ -592,6 +590,7 @@ img.large {
 .support-users .unread {
   background-color: #f02020;
 }
+
 .columns {
   display: inline;
   flex-direction: row;
@@ -636,12 +635,14 @@ img.large {
 .rating span:last-child {
   color: #404040;
 }
+
 .d-block1 {
   border-radius: 50%;
-  padding:70px;
+  padding: 70px;
 
 }
-.d-block1:hover{
+
+.d-block1:hover {
   cursor: pointer;
 }
 

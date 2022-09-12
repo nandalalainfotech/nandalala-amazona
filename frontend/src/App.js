@@ -78,7 +78,7 @@ function App() {
               <i className="fa fa-bars"></i>
             </button>
             <Link className="brand" to="/">
-              amazona
+              Nandalala
             </Link>
           </div>
           <div>
@@ -110,7 +110,7 @@ function App() {
 
 
             )}
-            {userInfo ? (
+            {/* {userInfo ? (
               <div className="dropdown">
                 <Link to="#">
                   {userInfo.name} <i className="fa fa-caret-down"></i>{" "}
@@ -131,22 +131,22 @@ function App() {
               </div>
             ) : (
               <Link to="/signin">Sign In</Link>
-            )}
-            {userInfo && userInfo.isSeller && (
-              <div className="dropdown">
-                <Link to="#admin">
-                  Seller <i className="fa fa-caret-down"></i>
-                </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/productlist/seller">Products</Link>
-                  </li>
-                  <li>
-                    <Link to="/orderlist/seller">Orders</Link>
-                  </li>
-                </ul>
-              </div>
-            )}
+            )} */}
+            {/* {userInfo && userInfo.iseller && ( */}
+            <div className="dropdown">
+              <Link to="#admin">
+                Seller <i className="fa fa-caret-down"></i>
+              </Link>
+              <ul className="dropdown-content">
+                <li>
+                  <Link to="/productlist">Products</Link>
+                </li>
+                <li>
+                  <Link to="/orderlist">Orders</Link>
+                </li>
+              </ul>
+            </div>
+            {/* )} */}
             {userInfo && userInfo.isAdmin && (
               <div className="dropdown">
                 <Link to="#admin">
@@ -170,6 +170,29 @@ function App() {
                   </li>
                 </ul>
               </div>
+            )}
+            {userInfo ? (
+              // eslint-disable-next-line no-undef
+              <div className="dropdown">
+                <Link to="#"  >
+                  {userInfo.name} <i className="fa fa-caret-down"></i>{" "}
+                </Link>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/profile">UserProfile</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderhistory">OrderHistory</Link>
+                  </li>
+                  <li>
+                    <Link to="#signout" onClick={signoutHandler}>
+                      SignOut
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <Link to="/signin">Sign In</Link>
             )}
           </div>
         </header>
@@ -332,7 +355,7 @@ function App() {
                 </AdminRoute>
               }
             />
-             {/* <Route
+            {/* <Route
               path="/Saree/:id"
               element={<SareeScreen />}
               exact
@@ -345,7 +368,7 @@ function App() {
                 </AdminRoute>
               }
             />
-             <Route
+            <Route
               path="/Sareelist/pageNumber/:pageNumber"
               element={
                 <AdminRoute>

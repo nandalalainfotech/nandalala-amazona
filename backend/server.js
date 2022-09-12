@@ -10,7 +10,7 @@ import path from 'path';
 import uploadRouter from './routers/uploadRouter.js';
 import http from 'http';
 import { Server } from 'socket.io';
-import data from './data.js';
+
 
 dotenv.config();
 
@@ -52,7 +52,7 @@ app.get('*', (req, res) =>
 //   res.send('Server is ready');
 // });
 
-app.use((err, req, res) => {
+app.use((err, req, res,next) => {
     res.status(500).send({ message: err.message });
 });
 const port = process.env.PORT || 5000;
