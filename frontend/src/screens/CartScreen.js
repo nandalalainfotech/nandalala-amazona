@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { addToCart, removeFromCart } from "../actions/cartAction";
 import MessageBox from "../components/MessageBox";
-
 export default function CartScreen(props) {
   const navigate = useNavigate();
   const params = useParams();

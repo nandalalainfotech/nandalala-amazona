@@ -15,7 +15,7 @@ export default function SearchScreen(props) {
     min = 0,
     max = 0,
     rating = 0,
-    order = '',
+    order = 'newest',
     pageNumber = 1,
   } = useParams();
   const dispatch = useDispatch();
@@ -42,13 +42,13 @@ export default function SearchScreen(props) {
   }, [category, dispatch, max, min, name, order, rating, pageNumber]);
 
   const getFilterUrl = (filter) => {
-    const filterPage = filter.page || pageNumber;
     const filterCategory = filter.category || category;
     const filterName = filter.name || name;
-    const filterRating = filter.rating || rating;
-    const sortOrder = filter.order || order;
     const filterMin = filter.min ? filter.min : filter.min === 0 ? 0 : min;
     const filterMax = filter.max ? filter.max : filter.max === 0 ? 0 : max;
+    const filterRating = filter.rating || rating;
+    const sortOrder = filter.order || order;
+    const filterPage = filter.page || pageNumber;
     return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
@@ -90,6 +90,7 @@ export default function SearchScreen(props) {
                   <Link
                     className={'all' === category ? 'active' : ''}
                     to={getFilterUrl({ category: 'all' })}
+                    // to={`/search/category/sample category`}
                   >
                     Any
                   </Link>
@@ -99,6 +100,9 @@ export default function SearchScreen(props) {
                     <Link
                       className={c === category ? 'active' : ''}
                       to={getFilterUrl({ category: c })}
+                      // to={`/search/category/${c}`}
+
+
                     >
                       {c}
                     </Link>

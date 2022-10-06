@@ -75,7 +75,7 @@ const data = {
     ],
     Saree: [
       {
-        _id: '7',
+        _id: '31',
         name: 'Cotton Saree',
         category: 'Shirts',
         image: '/images/p12.jpg',
@@ -87,7 +87,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '8',
+        _id: '32',
         name: 'Silk Saree',
         category: 'Shirts',
         image: '/images/p91.jpg',
@@ -99,7 +99,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '9',
+        _id: '33',
         name: 'Apoorva Saree',
         category: 'Shirts',
         image: '/images/p10.jpg',
@@ -111,7 +111,7 @@ const data = {
         description: 'high quality product',
       },
       {
-        _id: '10',
+        _id: '34',
         name: 'Material Saree',
         category: 'Pants',
         image: '/images/sa4.jpg',
@@ -120,10 +120,10 @@ const data = {
         brand: 'Nike',
         rating: 4.5,
         numReviews: 14,
-        description: 'high quality product',
+        description: 'high description product',
       },
       {
-        _id: '11',
+        _id: '35',
         name: 'Kurtha Saree',
         category: 'Pants',
         image: '/images/sa5.jpg',

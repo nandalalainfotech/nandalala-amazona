@@ -6,7 +6,7 @@ export default function Saree(props) {
   const { Saree } = props;
   return (
     <div key={Saree._id} className="card">
-      <Link to={`/saree/${Saree._id}`}>
+      <Link to={`/Saree/${Saree._id}`}>
         <img className="medium" src={Saree.image} alt={Saree.name} />
       </Link>
       <div className="card-body">

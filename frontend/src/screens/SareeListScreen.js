@@ -61,7 +61,7 @@ export default function SareeListScreen(props) {
     pageNumber,
   ]);
   const deleteHandler = (Saree) => {
-    if (window.confirm("Are you sure to delete?")) {
+    if (window.confirm("Are you sure  to delete?")) {
       dispatch(deleteSaree(Saree._id));
     }
   };
@@ -86,17 +86,17 @@ export default function SareeListScreen(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>PRICE</th>
-              <th>CATEGORY</th>
-              <th>BRAND</th>
-              <th>ACTIONS</th>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <th>CATEGORY</th>
+                <th>BRAND</th>
+                <th>ACTIONS</th>
               </tr>
-              </thead>
+            </thead>
             <tbody>
               {SAREEs.map((Saree) => (
                 <tr key={Saree._id}>
@@ -137,8 +137,8 @@ export default function SareeListScreen(props) {
                 {x + 1}
               </Link>
             ))}
-         </div>
-         </>
+          </div>
+        </>
       )}
     </div>
   );

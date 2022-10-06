@@ -1,31 +1,32 @@
 import Axios from 'axios';
 
+
 import {
-    SAREE_CREATE_FAIL,
-    SAREE_CREATE_REQUEST,
-    SAREE_CREATE_SUCCESS,
-    SAREE_DETAILS_FAIL,
-    SAREE_DETAILS_REQUEST,
-    SAREE_DETAILS_SUCCESS,
-    SAREE_LIST_FAIL,
-    SAREE_LIST_REQUEST,
-    SAREE_LIST_SUCCESS,
-    SAREE_UPDATE_REQUEST,
-    SAREE_UPDATE_SUCCESS,
-    SAREE_UPDATE_FAIL,
-    SAREE_DELETE_REQUEST,
-    SAREE_DELETE_FAIL,
-    SAREE_DELETE_SUCCESS,
-    SAREE_CATEGORY_LIST_SUCCESS,
-    SAREE_CATEGORY_LIST_REQUEST,
-    SAREE_CATEGORY_LIST_FAIL,
-    SAREE_REVIEW_CREATE_REQUEST,
-    SAREE_REVIEW_CREATE_SUCCESS,
-    SAREE_REVIEW_CREATE_FAIL,
-  } from '../constants/sareeConstants';
+  SAREE_CREATE_FAIL,
+  SAREE_CREATE_REQUEST,
+  SAREE_CREATE_SUCCESS,
+  SAREE_DETAILS_FAIL,
+  SAREE_DETAILS_REQUEST,
+  SAREE_DETAILS_SUCCESS,
+  SAREE_LIST_FAIL,
+  SAREE_LIST_REQUEST,
+  SAREE_LIST_SUCCESS,
+  SAREE_UPDATE_REQUEST,
+  SAREE_UPDATE_SUCCESS,
+  SAREE_UPDATE_FAIL,
+  SAREE_DELETE_REQUEST,
+  SAREE_DELETE_FAIL,
+  SAREE_DELETE_SUCCESS,
+  SAREE_CATEGORY_LIST_SUCCESS,
+  SAREE_CATEGORY_LIST_REQUEST,
+  SAREE_CATEGORY_LIST_FAIL,
+  SAREE_REVIEW_CREATE_REQUEST,
+  SAREE_REVIEW_CREATE_SUCCESS,
+  SAREE_REVIEW_CREATE_FAIL,
+} from '../constants/sareeConstants';
 
 
-  export const listsaree =
+export const listsaree =
 
   ({
     pageNumber = '',
@@ -37,40 +38,41 @@ import {
     max = 0,
     rating = 0,
   }) =>
-  async (dispatch) => {
-    dispatch({
-      type:SAREE_LIST_REQUEST,
-    });
-    try {
-      const { data } = await Axios.get(
-        `/api/Saree?pageNumber=${pageNumber}&seller=${seller}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`
-      );
-      dispatch({ type:SAREE_LIST_SUCCESS, payload: data });
-    } catch (error) {
-      dispatch({ type:SAREE_LIST_FAIL, payload: error.message });
-    }
-  };
+    async (dispatch) => {
+      dispatch({
+        type: SAREE_LIST_REQUEST,
+      });
+      try {
+        const { data } = await Axios.get(
+          `/api/saree?pageNumber=${pageNumber}&seller=${seller}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`
+        );
+        dispatch({ type: SAREE_LIST_SUCCESS, payload: data });
+      } catch (error) {
+        dispatch({ type: SAREE_LIST_FAIL, payload: error.message });
+      }
+    };
 
 export const listSareeCategories = () => async (dispatch) => {
   dispatch({
-    type:SAREE_CATEGORY_LIST_REQUEST,
+    type: SAREE_CATEGORY_LIST_REQUEST,
   });
   try {
-    const { data } = await Axios.get(`/api/Saree/categories`);
-    dispatch({ type:SAREE_CATEGORY_LIST_SUCCESS, payload: data });
+    const { data } = await Axios.get(`/api/saree/categories`);
+    dispatch({ type: SAREE_CATEGORY_LIST_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type:SAREE_CATEGORY_LIST_FAIL, payload: error.message });
+    dispatch({ type: SAREE_CATEGORY_LIST_FAIL, payload: error.message });
   }
 };
 
 export const detailsSaree = (SareeId) => async (dispatch) => {
-  dispatch({ type:SAREE_DETAILS_REQUEST, payload:SareeId });
+  console.log("sareeid",SareeId);
+  dispatch({ type: SAREE_DETAILS_REQUEST, payload: SareeId });
   try {
-    const { data } = await Axios.get(`/api/Saree/${SareeId}`);
-    dispatch({ type:SAREE_DETAILS_SUCCESS, payload: data });
+    const { data } = await Axios.get(`/api/saree/${SareeId}`);
+    dispatch({ type: SAREE_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
-      type:SAREE_DETAILS_FAIL,
+      type: SAREE_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -79,20 +81,20 @@ export const detailsSaree = (SareeId) => async (dispatch) => {
   }
 };
 export const createSaree = () => async (dispatch, getState) => {
-  dispatch({ type:SAREE_CREATE_REQUEST });
+  dispatch({ type: SAREE_CREATE_REQUEST });
   const {
     userSignin: { userInfo },
   } = getState();
   try {
     const { data } = await Axios.post(
-      '/api/Saree',
+      '/api/saree',
       {},
       {
         headers: { Authorization: `Bearer ${userInfo.token}` },
       }
     );
     dispatch({
-      type:SAREE_CREATE_SUCCESS,
+      type: SAREE_CREATE_SUCCESS,
       payload: data.Saree,
     });
   } catch (error) {
@@ -100,71 +102,69 @@ export const createSaree = () => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    dispatch({ type:SAREE_CREATE_FAIL, payload: message });
+    dispatch({ type: SAREE_CREATE_FAIL, payload: message });
   }
 };
 export const updateSaree = (Saree) => async (dispatch, getState) => {
-  dispatch({ type:SAREE_UPDATE_REQUEST, payload:Saree });
+  dispatch({ type: SAREE_UPDATE_REQUEST, payload:{ Saree} });
   const {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.put(`/api/Saree/${Saree._id}`,Saree, {
+    const { data } = await Axios.put(`/api/saree/${Saree._id}`, Saree, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
-    dispatch({ type:SAREE_UPDATE_SUCCESS, payload: data });
+    dispatch({ type: SAREE_UPDATE_SUCCESS, payload: data });
   } catch (error) {
     const message =
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    dispatch({ type:SAREE_UPDATE_FAIL, error: message });
+    dispatch({ type: SAREE_UPDATE_FAIL, error: message });
   }
 };
 export const deleteSaree = (SareeId) => async (dispatch, getState) => {
-  dispatch({ type:SAREE_DELETE_REQUEST, payload:SareeId });
+  dispatch({ type: SAREE_DELETE_REQUEST, payload: SareeId });
   const {
     userSignin: { userInfo },
   } = getState();
   try {
-    await Axios.delete(`/api/Saree/${SareeId}`, {
+    await Axios.delete(`/api/saree/${SareeId}`, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
-    dispatch({ type:SAREE_DELETE_SUCCESS });
+    dispatch({ type: SAREE_DELETE_SUCCESS });
   } catch (error) {
     const message =
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    dispatch({ type:SAREE_DELETE_FAIL, payload: message });
+    dispatch({ type: SAREE_DELETE_FAIL, payload: message });
   }
 };
-export const createReview =
-  (SareeId, review) => async (dispatch, getState) => {
-    dispatch({ type:SAREE_REVIEW_CREATE_REQUEST });
-    const {
-      userSignin: { userInfo },
-    } = getState();
-    try {
-      const { data } = await Axios.post(
-        `/api/Saree/${SareeId}/reviews`,
-        review,
-        {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        }
-      );
-      dispatch({
-        type:SAREE_REVIEW_CREATE_SUCCESS,
-        payload: data.review,
-      });
-    } catch (error) {
-      const message =
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message;
-      dispatch({ type:SAREE_REVIEW_CREATE_FAIL, payload: message });
-    }
-  };
+export const createReview = (SareeId, review) => async (dispatch, getState) => {
+  dispatch({ type: SAREE_REVIEW_CREATE_REQUEST });
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  try {
+    const { data } = await Axios.post(`/api/saree/${SareeId}, {}`,
+      review,
+      {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      }
+    );
+    dispatch({
+      type: SAREE_REVIEW_CREATE_SUCCESS,
+      payload: data.Saree,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: SAREE_REVIEW_CREATE_FAIL, payload: message });
+  }
+};
 
 
 

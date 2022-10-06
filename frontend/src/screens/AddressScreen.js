@@ -26,7 +26,7 @@ export default function AddressListScreen(props) {
     });
   }, [dispatch, successDelete]);
   const deleteHandler = (user) => {
-
+   
   };
 
   return (
