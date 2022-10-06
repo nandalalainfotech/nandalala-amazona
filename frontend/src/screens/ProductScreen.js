@@ -6,11 +6,8 @@ import MessageBox from "../components/MessageBox";
 import Rating from "../components/Rating";
 import { createReview, detailsProduct } from "../actions/productAction";
 import { PRODUCT_REVIEW_CREATE_RESET } from "../constants/productConstants";
-import Row from "react-bootstrap/Row";
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
+
+import ReactImageMagnify from 'react-image-magnify';
 
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
@@ -22,6 +19,7 @@ export default function ProductScreen(props) {
   const { loading, error, product } = productDetails;
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+
 
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
   const {
@@ -45,6 +43,8 @@ export default function ProductScreen(props) {
   const addToCartHandler = () => {
     navigate(`/cart/${productId}?qty=${qty}`);
   };
+
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (comment && rating) {
@@ -55,6 +55,8 @@ export default function ProductScreen(props) {
       alert('Please enter comment and rating');
     }
   };
+
+
   return (
     <div>
       {loading ? (
@@ -62,15 +64,31 @@ export default function ProductScreen(props) {
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <div>
+        <div >
           <Link to="/">Back to result</Link>
           <div className="row top">
             <div className="col-2">
-              <img
-                className="large"
-                src={product.image}
-                alt={product.name}
-              ></img>
+              <ReactImageMagnify {...{
+                smallImage: {
+                  className: "large",
+                  src: product.image,
+                  width: 300,
+                  height: 400,
+
+                },
+                largeImage: {
+                  className: "small",
+                  src: product.image,
+                  width: 600,
+                  height: 600,
+
+                },
+
+
+              }} />
+
+
+
             </div>
             <div className="col-1">
               <ul>

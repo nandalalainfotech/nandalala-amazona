@@ -7,33 +7,40 @@ import MessageBox from "../components/MessageBox";
 import Rating from "../components/Rating";
 import { createReview, detailsSaree } from "../actions/sareeAction";
 import { SAREE_REVIEW_CREATE_RESET } from "../constants/sareeConstants";
+import data from '../data';
+
+import ReactImageMagnify from 'react-image-magnify';
 
 
 
 
-export default function SareeScreen(props) {
+export default function SareeScreen() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const params = useParams();
     const { id: SareeId } = params;
     const [qty, setQty] = useState(1);
-    const sareeDetails = useSelector((state) => state.sareeDetails);
+    const sareeDetails = useSelector((state) => state.sareeDetails || []);
     const { loading, error, Saree } = sareeDetails;
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
 
-    const sareeReviewCreate = useSelector((state) => state.sareeReviewCreate);
+    const sareeReviewCreate = useSelector((state) => state.sareeReviewCreate || []);
     const {
         loading: loadingReviewCreate,
         error: errorReviewCreate,
         success: successReviewCreate,
     } = sareeReviewCreate;
 
+
+
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
 
     useEffect(() => {
+        console.log("data", data);
         if (successReviewCreate) {
+            console.log("data", data?.length);
             window.alert('Review Submitted Successfully');
             setRating('');
             setComment('');
@@ -74,11 +81,29 @@ export default function SareeScreen(props) {
                     <Link to="/">go</Link>
                     <div className="row top">
                         <div className="col-2">
-                            <img
+                            <ReactImageMagnify {...{
+                                smallImage: {
+                                    className: "large",
+                                    src: Saree.image,
+                                    width: 300,
+                                    height: 400,
+
+                                },
+                                largeImage: {
+                                    className: "small",
+                                    src: Saree.image,
+                                    width: 600,
+                                    height: 600,
+
+                                },
+
+
+                            }} />
+                            {/* <img
                                 className="large"
                                 src={Saree.image}
                                 alt={Saree.name}
-                            ></img>
+                            ></img> */}
                         </div>
                         <div className="col-1">
                             <ul>
@@ -168,18 +193,18 @@ export default function SareeScreen(props) {
                     </div>
                     <div>
                         <h2 id="reviews">Reviews</h2>
-                        {Saree.reviews.length === 0 && (
-                            <MessageBox>There is no review</MessageBox>
-                        )}
+                        {/* {Saree.reviews.length === 0 && ( */}
+                        <MessageBox>There is no review</MessageBox>
+                        {/* )} */}
                         <ul>
-                            {Saree.reviews.map((review) => (
+                            {/* {Saree.reviews.map((review) => (
                                 <li key={review._id}>
                                     <strong>{review.name}</strong>
                                     <Rating rating={review.rating} caption=" "></Rating>
                                     <p>{review.createdAt.substring(0, 10)}</p>
                                     <p>{review.comment}</p>
                                 </li>
-                            ))}
+                            ))} */}
                             <li>
                                 {userInfo ? (
                                     <form className="form" onSubmit={submitHandler}>

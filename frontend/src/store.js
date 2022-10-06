@@ -59,5 +59,5 @@ const store = createStore(
   initialState,
   composeEnhancer(applyMiddleware(thunk))
 );
-
+document.cookie='name=Dhanaraj'
 export default store;

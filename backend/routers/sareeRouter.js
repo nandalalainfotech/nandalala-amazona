@@ -84,7 +84,7 @@ sareeRouter.get(
     // res.send({ createdsarees });
     const seller = await User.findOne({ isSeller: true });
     if (seller) {
-      const sarees = data.sarees.map((saree) => ({
+      const sarees = data.Saree.map((saree) => ({
         ...saree,
         seller: seller._id,
       }));
@@ -98,17 +98,21 @@ sareeRouter.get(
   })
 );
 
-sareeRouter.get(
+sareeRouter.post(
   '/:id',
   expressAsyncHandler(async (req, res) => {
+    console.log("sareeid",req.params.id);
+    // console.log("sareeid",req.params.id);
     // const saree = await saree.findById(req.params.id);
     const saree = await saree.findById(req.params.id).populate(
       'seller',
       'seller.name seller.logo seller.rating seller.numReviews'
     );
     if (saree) {
+      console.log("sarees--->if");
       res.send(saree);
     } else {
+      console.log("sarees--->else");
       res.status(404).send({ message: 'saree Not Found' });
     }
   })
@@ -142,17 +146,18 @@ sareeRouter.put(
   isAdmin,
   isSellerOrAdmin,
   expressAsyncHandler(async (req, res) => {
+   
     const sareeId = req.params.id;
     const saree = await saree.findById(sareeId);
     if (saree) {
       saree.name = req.body.name;
       saree.price = req.body.price;
       saree.image = req.body.image;
-       saree.category = req.body.category;
+      saree.category = req.body.category;
       saree.brand = req.body.brand;
       saree.countInStock = req.body.countInStock;
       saree.description = req.body.description;
-      const updatedsaree = await saree.save();
+      const updatedsaree = await sarees.save();
       res.send({ message: 'saree Updated', saree: updatedsaree });
     } else {
       res.status(404).send({ message: 'saree Not Found' });

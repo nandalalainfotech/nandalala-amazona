@@ -36,6 +36,9 @@ import SupportScreen from "./screens/SupportScreen";
 import SareeScreen from "./screens/SareeScreen";
 import BookScreen from "./screens/BookScreen";
 
+
+
+
 function App() {
   const cart = useSelector((state) => state.cart);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
@@ -78,9 +81,20 @@ function App() {
               <i className="fa fa-bars"></i>
             </button>
             <Link className="brand" to="/">
-              Nandalala
+              {/* <img src="/logo9.png" alt="logo" width="50px" height="50px"/>*/}
+              Lala
             </Link>
           </div>
+
+          <nav>
+            <Link to="saree">Saree</Link>
+            <Link to="/pant">pant</Link>
+            <Link to="/pants">pants</Link>
+            <Link to="/sample category">Sample Category</Link>
+            <Link to="/shirts">Shirts</Link>
+            <Link to="/menu">Menu</Link>
+          
+          </nav>
           <div>
             <SearchBox />
           </div>
@@ -302,6 +316,7 @@ function App() {
               element={<SearchScreen />}
               exact
             ></Route>
+
             <Route
               path="/productlist/seller"
               element={

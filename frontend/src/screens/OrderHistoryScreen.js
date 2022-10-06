@@ -30,6 +30,7 @@ export default function OrderHistoryScreen(props) {
               <th>PAID</th>
               <th>DELIVERED</th>
               <th>ACTIONS</th>
+              
             </tr>
           </thead>
           <tbody>
@@ -54,7 +55,9 @@ export default function OrderHistoryScreen(props) {
                   >
                     Details
                   </button>
+                 
                 </td>
+                
               </tr>
             ))}
           </tbody>

@@ -77,9 +77,9 @@ const data = {
         },
         {
 
-            name: 'formal pant',
+            name: 'Sarees',
             category: 'Saree',
-            image: '/image/p5.jpg',
+            image: '/image/p8.jpg',
             price: 920,
             countInStock: 103,
             brand: 'adidas',
