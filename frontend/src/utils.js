@@ -38,7 +38,7 @@ export const prices = [
   
     {
       name: '1stars & up',
-      rating: 1,
+      rating: 18,
     },
   ];
 

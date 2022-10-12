@@ -10,15 +10,24 @@ const productRouter = express.Router();
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
-    const pageSize = 12;
+    const pageSize = 4;
     const page = Number(req.query.pageNumber) || 1;
     const name = req.query.name || '';
     const seller = req.query.seller || '';
     const category = req.query.category || '';
     const order = req.query.order || '';
-    const min = req.query.min && Number(req.query.min) !== 1 ? Number(req.query.min) : 1;
-    const max = req.query.max && Number(req.query.max) !== 1 ? Number(req.query.max) : 1;
-    const rating = req.query.rating && Number(req.query.rating) !== 0 ? Number(req.query.rating) : 0;
+    const min =
+      req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
+    const max =
+      req.query.max && Number(req.query.max) !== 0 ? Number(req.query.max) : 0;
+    const rating =
+      req.query.rating && Number(req.query.rating) !== 0
+        ? Number(req.query.rating)
+        : 0;
+
+
+
+
     const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
     const sellerFilter = seller ? { seller } : {};
     const categoryFilter = category ? { category} : {};
@@ -138,7 +147,7 @@ productRouter.put(
       product.name = req.body.name;
       product.price = req.body.price;
       product.image = req.body.image;
-      // product.images = req.body.images;
+      product.images = req.body.images;
       product.category = req.body.category;
       product.brand = req.body.brand;
       product.countInStock = req.body.countInStock;

@@ -4,12 +4,34 @@ import { addressListReducer } from './reducers/addressReducers';
 import { cartReducer } from './reducers/cartReducers';
 import { orderCreateReducer, orderDeleteReducer, orderDeliverReducer, orderDetailsReducer, orderListReducer, orderMineListReducer, orderPayReducer, orderSummaryReducer } from './reducers/orderReducers';
 import { productCategoryListReducer, productCreateReducer, productDeleteReducer, productDetailsReducer, productListReducer, productReviewCreateReducer, productUpdateReducer } from './reducers/productReducers';
-import { userAddressMapReducer, userDeleteReducer, userDetailsReducer, userListReducer, userRegisterReducer, userSigninReducer, userTopSellerListReducer, userUpdateProfileReducer, userUpdateReducer } from './reducers/userReducers';
+import { userAddressMapReducer, userDeleteReducer, userDetailsReducer, userListReducer, userRegisterReducer, userSigninReducer, userAccountReducer,userAccountcreationReducer,userAdmininReducer ,userTopSellerListReducer, userUpdateProfileReducer, userUpdateReducer } from './reducers/userReducers';
 import { SareeListReducer, SareeDetailsReducer } from './reducers/sareeReducer';
+
+
+  
 const initialState = {
+  
+
   userSignin: {
     userInfo: localStorage.getItem('userInfo')
       ? JSON.parse(localStorage.getItem('userInfo'))
+      : null,
+  },
+
+
+  userAccount: {
+        accountInfo: localStorage.getItem('data')
+        ? JSON.parse(localStorage.getItem('data'))
+        : null,
+  },
+  userAccountCreation: {
+    accountcreationInfo: localStorage.getItem('accountcreationInfo')
+      ? JSON.parse(localStorage.getItem('accountcreationInfo'))
+      : null,
+  },
+  userAdminin: {
+    adminInfo: localStorage.getItem('adminInfo')
+      ? JSON.parse(localStorage.getItem('adminInfo'))
       : null,
   },
   cart: {
@@ -28,6 +50,9 @@ const reducer = combineReducers({
   productDetails: productDetailsReducer,
   cart: cartReducer,
   userSignin: userSigninReducer,
+  userAccount: userAccountReducer,
+  userAccountCreation: userAccountcreationReducer,
+  userAdminin: userAdmininReducer,
   userRegister: userRegisterReducer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
@@ -59,5 +84,5 @@ const store = createStore(
   initialState,
   composeEnhancer(applyMiddleware(thunk))
 );
-document.cookie='name=Dhanaraj'
+document.cookie='name=sri'
 export default store;

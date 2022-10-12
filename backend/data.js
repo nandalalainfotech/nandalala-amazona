@@ -2,16 +2,90 @@ import bcrypt from 'bcryptjs';
 
 
 const data = {
-    users: [
+
+    accountin: [
         {
-            name: 'Dhanaraj',
-            email: 'admin1@example.com',
+            _id: '20',
+            email: 'admins10@email.com'
+        },
+        {
+            _id: '21',
+            email: 'sri13@email.com'
+        }
+    ],
+    sarees: [
+        {
+            _id: '31',
+            name: 'Cotton Saree',
+            category: 'Sarees',
+            image: '/images/p12.jpg',
+            price: 120,
+            countInStock: 10,
+            brand: 'Nike',
+            rating: 4.5,
+            numReviews: 10,
+            description: 'high quality product',
+        },
+        {
+            _id: '32',
+            name: 'Silk Saree',
+            category: 'Sarees',
+            image: '/images/p91.jpg',
+            price: 100,
+            countInStock: 20,
+            brand: 'Adidas',
+            rating: 4.0,
+            numReviews: 10,
+            description: 'high quality product',
+        },
+        {
+            _id: '33',
+            name: 'Apoorva Saree',
+            category: 'saree',
+            image: '/images/p10.jpg',
+            price: 220,
+            countInStock: 10,
+            brand: 'Lacoste',
+            rating: 4.8,
+            numReviews: 17,
+            description: 'high quality product',
+        },
+        {
+            _id: '34',
+            name: 'Material Saree',
+            category: 'sarees',
+            image: '/images/sa4.jpg',
+            price: 78,
+            countInStock: 15,
+            brand: 'Nike',
+            rating: 4.5,
+            numReviews: 14,
+            description: 'high quality product',
+        },
+        {
+            _id: '35',
+            name: 'Kurtha Saree',
+            category: 'sarees',
+            image: '/images/sa5.jpg',
+            price: 65,
+            countInStock: 5,
+            brand: 'Puma',
+            rating: 4.5,
+            numReviews: 10,
+            description: 'high quality product',
+        },
+
+    ],
+    admins: [
+        {
+            name: 'Nandalala.in',
+            email: 'admin2@example.com',
             password: bcrypt.hashSync('1234', 8),
             isAdmin: true,
             isSeller: true,
             seller: {
                 name: 'Puma',
-                logo: '/image/toys.jpg',
+                logo1: '/image/toys.jpg',
                 description: 'best seller',
                 rating: 4.5,
                 numReviews: 120,
@@ -19,7 +93,32 @@ const data = {
 
         },
         {
-            name: 'Arunkumar',
+            name: 'John',
+            email: 'users@example.com',
+            password: bcrypt.hashSync('1234', 8),
+            isAdmin: false,
+
+        },
+    ],
+
+    users: [
+        {
+            name: 'Sri',
+            email: 'admin1@example.com',
+            password: bcrypt.hashSync('1234', 8),
+            isAdmin: true,
+            isSeller: true,
+            seller: {
+                name: 'Puma',
+                logo1: '/image/toys.jpg',
+                description: 'best seller',
+                rating: 4.5,
+                numReviews: 120,
+            },
+
+        },
+        {
+            name: 'John',
             email: 'users@example.com',
             password: bcrypt.hashSync('1234', 8),
             isAdmin: false,
@@ -77,9 +176,9 @@ const data = {
         },
         {
 
-            name: 'Sarees',
-            category: 'Saree',
-            image: '/image/p8.jpg',
+            name: 'formal pant',
+            category: 'pants',
+            image: '/image/p5.jpg',
             price: 920,
             countInStock: 103,
             brand: 'adidas',

@@ -8,7 +8,6 @@ import { generateToken, isAuth, isAdmin } from '../utils.js';
 
 const userRouter = express.Router();
 
-
 userRouter.get(
   '/top-sellers',
   expressAsyncHandler(async (req, res) => {
@@ -16,8 +15,8 @@ userRouter.get(
       .sort({ 'seller.rating': -1 })
       .limit(3);
     res.send(topSellers);
-// console.log('topSellers');
-    }
+    // console.log('topSellers');
+  }
   )
 );
 
@@ -49,6 +48,70 @@ userRouter.post(
 );
 
 userRouter.post(
+  '/accountin',
+  expressAsyncHandler(async (req, res) => {
+    const accountin = await User.findOne({ email: req.body.email });
+    if (accountin) {
+      if (bcrypt.compareSync(req.body.password, accountin.password)) {
+        res.send({
+          _id: accountin._id,
+          name: accountin.name,
+          email: accountin.email,
+          isAdmin: accountin.isAdmin,
+          isSeller: accountin.isSeller,
+          token: generateToken(accountin),
+        });
+        return;
+      }
+    }
+    res.status(401).send({ message: 'Invalid email' });
+  })
+);
+userRouter.post(
+  '/accountcreation',
+  expressAsyncHandler(async (req, res) => {
+    const accountcreation = await User.findOne({ email: req.body.email });
+    if (User) {
+      if (bcrypt.compareSync(req.body.password, accountcreation.password)) {
+        res.send({
+          _id: accountcreation._id,
+          name: accountcreation.name,
+          email: accountcreation.email,
+          isAdmin: accountcreation.isAdmin,
+          isSeller: accountcreation.isSeller,
+          token: generateToken(accountcreation),
+        });
+        return;
+      }
+    }
+    res.status(401).send({ message: 'Invalid email' });
+  })
+);
+
+
+
+userRouter.post(
+  '/adminin',
+  expressAsyncHandler(async (req, res) => {
+    const adminin = await User.findOne({ email: req.body.email });
+    if (adminin) {
+      if (bcrypt.compareSync(req.body.password, adminin.password)) {
+        res.send({
+          _id: adminin._id,
+          name: adminin.name,
+          email: adminin.email,
+          isAdmin: adminin.isAdmin,
+          isSeller: adminin.isSeller,
+          token: generateToken(adminin),
+        });
+        return;
+      }
+    }
+    res.status(401).send({ message: 'Invalid email or password' });
+  })
+);
+
+userRouter.post(
   '/register',
   expressAsyncHandler(async (req, res) => {
     const user = new User({
@@ -56,18 +119,81 @@ userRouter.post(
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 8),
     });
-    const createdUser = await user.save();
+    const registerUser = await user.save();
     res.send({
-      _id: createdUser._id,
-      name: createdUser.name,
-      email: createdUser.email,
-      isAdmin: createdUser.isAdmin,
+      _id: registerUser._id,
+      name: registerUser.name,
+      email: registerUser.email,
+      isAdmin: registerUser.isAdmin,
       isSeller: user.isSeller,
-      token: generateToken(createdUser),
+      token: generateToken(registerUser),
+
     });
   })
 );
 
+// userRouter.post(
+//   '/account',
+//   expressAsyncHandler(async (req, res) => {
+//     const user = new User({
+//       name: req.body.name,
+//       email: req.body.email,
+//       password: bcrypt.hashSync(req.body.password,8),
+//     });
+//     const accountUser = await user.save();
+//     res.send({
+//       _id:accountUser._id,
+//       name: accountUser.name,
+//       email: accountUser.email,
+//       isAdmin:accountUser.isAdmin,
+//       isSeller: user.isSeller,
+//       token: generateToken(accountUser),
+
+//     });
+//   })
+// );
+
+
+// userRouter.post(
+//   '/accountcreation',
+//   expressAsyncHandler(async (req, res) => {
+//     const accountcreation = new User({
+//       name: req.body.name,
+//       email: req.body.email,
+//       password: bcrypt.hashSync(req.body.password, 8),
+//     });
+//     const accountcreation = await user.save();
+//     res.send({
+//       _id: accountcreation._id,
+//       name: accountcreation.name,
+//       email: accountcreation.email,
+//       isAdmin: accountcreation.isAdmin,
+//       isSeller: accountcreation.isSeller,
+//       token: generateToken(accountcreation),
+
+//     });
+//   })
+// );
+userRouter.post(
+  '/adminin',
+  expressAsyncHandler(async (req, res) => {
+    const admin = await User.findOne({ email: req.body.email });
+    if (admin) {
+      if (bcrypt.compareSync(req.body.password, admin.password)) {
+        res.send({
+          _id: adminuser._id,
+          name: adminuser.name,
+          email: adminuser.email,
+          isAdmin: adminuser.isAdmin,
+          isSeller: adminuser.isSeller,
+          token: generateToken(adminuser),
+        });
+        return;
+      }
+    }
+    res.status(401).send({ message: 'Invalid email or password' });
+  })
+);
 userRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
@@ -118,7 +244,15 @@ userRouter.get(
     res.send(users);
   })
 );
-
+userRouter.get(
+  '/',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const accountin = await User.find({});
+    res.send(accountin);
+  })
+);
 userRouter.delete(
   '/:id',
   isAuth,

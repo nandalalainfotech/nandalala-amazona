@@ -18,6 +18,7 @@ export default function ProductEditScreen(props) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
+  // const [images, setImages] = useState("");
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState("");
   const [brand, setBrand] = useState("");
@@ -33,10 +34,10 @@ export default function ProductEditScreen(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     if (successUpdate) {
-        navigate('/productlist');
-      }
-      if (!product || product._id !== productId || successUpdate) {
-        dispatch({ type: PRODUCT_UPDATE_RESET });
+      navigate('/productlist');
+    }
+    if (!product || product._id !== productId || successUpdate) {
+      dispatch({ type: PRODUCT_UPDATE_RESET });
       dispatch(detailsProduct(productId));
     } else {
       setName(product.name);
@@ -52,24 +53,24 @@ export default function ProductEditScreen(props) {
     e.preventDefault();
     // TODO: dispatch update product
     dispatch(
-        updateProduct({
-          _id: productId,
-          name,
-          price,
-          image,
-          category,
-          brand,
-          countInStock,
-          description,
-        })
-      );
+      updateProduct({
+        _id: productId,
+        name,
+        price,
+        image,
+        category,
+        brand,
+        countInStock,
+        description,
+      })
+    );
   };
   const [loadingUpload, setLoadingUpload] = useState(false);
   const [errorUpload, setErrorUpload] = useState('');
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const uploadFileHandler = async (e) => {
-    console.log("xxx",e);
+    console.log("xxx", e);
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append('image', file);
@@ -138,7 +139,7 @@ export default function ProductEditScreen(props) {
               <input
                 type="file"
                 id="imageFile"
-                label="Choose Image"
+                label="Choose Images"
                 onChange={uploadFileHandler}
               ></input>
               {loadingUpload && <LoadingBox></LoadingBox>}

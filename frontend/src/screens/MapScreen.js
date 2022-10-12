@@ -14,7 +14,7 @@ import { useNavigate } from "../../node_modules/react-router-dom/index";
 const libs = ["places"];
 const defaultLocation = { lat: 45.516, lng: -73.56 };
 
-export default function MapScreen(props) {
+export default function MapScreen() {
   const naviagte = useNavigate();
   const [googleApiKey, setGoogleApiKey] = useState("");
   const [center, setCenter] = useState(defaultLocation);
@@ -98,7 +98,7 @@ export default function MapScreen(props) {
     <div className="full-container">
       <LoadScript libraries={libs} googleMapsApiKey={googleApiKey}>
         <GoogleMap
-          id="smaple-map"
+          id="sample-map"
           mapContainerStyle={{ height: "100%", width: "100%" }}
           center={center}
           zoom={15}

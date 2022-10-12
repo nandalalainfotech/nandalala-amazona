@@ -10,10 +10,23 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_REGISTEROUT,
   USER_SIGNIN_FAIL,
   USER_SIGNIN_REQUEST,
   USER_SIGNIN_SUCCESS,
   USER_SIGNOUT,
+  USER_ACCOUNT_FAIL,
+  USER_ACCOUNT_REQUEST,
+  USER_ACCOUNT_SUCCESS,
+  USER_ACCOUNTOUT,
+  USER_ACCOUNTCREATION_FAIL,
+  USER_ACCOUNTCREATION_REQUEST,
+  USER_ACCOUNTCREATION_SUCCESS,
+  USER_ACCOUNTCREATIONOUT,
+  USER_ADMININ_FAIL,
+  USER_ADMININ_REQUEST,
+  USER_ADMININ_SUCCESS,
+  USER_ADMINOUT,
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAIL,
@@ -51,15 +64,90 @@ export const register = (name, email, password) => async (dispatch) => {
 
 
 export const signin = (email, password) => async (dispatch) => {
-  console.log('signin',email,password);
-  dispatch({ type: USER_SIGNIN_REQUEST, payload: { email,password } });
+  dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
   try {
-    const { data } = await Axios.post('/api/users/signin', { email, password,});
+    const { data } = await Axios.post('/api/users/signin', { email, password });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: USER_SIGNIN_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const accountin = (email,password) => async (dispatch) => {
+  dispatch({ type: USER_ACCOUNT_REQUEST, payload: { email,password } });
+  try {
+    const { data } = await Axios.post('/api/users/accountin', { email ,password});
+    dispatch({ type: USER_ACCOUNT_SUCCESS, payload: data });
+    // dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
+    // localStorage.setItem('accountInfo', JSON.stringify(data));
+    localStorage.setItem('Email', JSON.stringify(email));
+  } catch (error) {
+    dispatch({
+      type: USER_ACCOUNT_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+
+    });
+  }
+};
+
+// export const account = (email) => async (dispatch) => {
+//   dispatch({ type: USER_ACCOUNT_REQUEST, payload: { email } });
+//   try {
+//     const { data } = await Axios.post('/api/users/account', {
+
+//       email,
+
+//     });
+//     dispatch({ type: USER_ACCOUNT_SUCCESS, payload: data });
+//     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
+//     localStorage.setItem('userInfo', JSON.stringify(data));
+//   } catch (error) {
+//     dispatch({
+//       type: USER_ACCOUNT_FAIL,
+//       payload:
+//         error.response && error.response.data.message
+//           ? error.response.data.message
+//           : error.message,
+//     });
+//   }
+// };
+
+export const accountcreation = (email) => async (dispatch) => {
+  dispatch({ type: USER_ACCOUNTCREATION_REQUEST, payload: { email } });
+  try {
+    const { data } = await Axios.post('/api/users/accountcreation', { email });
+    dispatch({ type: USER_ACCOUNTCREATION_SUCCESS, payload: data });
+    localStorage.setItem('accountcreationInfo', JSON.stringify(data));
+  } catch (error) {
+    dispatch({
+      type: USER_ACCOUNTCREATION_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+
+    });
+  }
+};
+export const adminin = (email, password) => async (dispatch) => {
+  dispatch({ type: USER_ADMININ_REQUEST, payload: { email, password } });
+  try {
+    const { data } = await Axios.post('api/users/adminin', { email, password });
+    dispatch({ type: USER_ADMININ_SUCCESS, payload: data });
+    localStorage.setItem('adminInfo', JSON.stringify(data));
+  } catch (error) {
+    dispatch({
+      type: USER_ADMININ_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -82,6 +170,113 @@ export const detailsUser = (userId) => async (dispatch, getState) => {
   try {
     const { data } = await Axios.get(`/api/users/${userId}`, {
       headers: { Authorization: `Bearer ${userInfo?.token}` },
+    });
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: USER_DETAILS_FAIL, payload: message });
+  }
+};
+
+export const accountout = () => (dispatch) => {
+  localStorage.removeItem('accountInfo');
+  localStorage.removeItem('cartItems');
+  localStorage.removeItem('shippingAddress');
+  dispatch({ type: USER_ACCOUNTOUT });
+  document.location.href = '/account';
+};
+export const accountUser = (accountId) => async (dispatch, getState) => {
+  dispatch({ type: USER_DETAILS_REQUEST, payload: accountId });
+  const {
+    userAccount: { accountInfo },
+  } = getState();
+  try {
+    const { data } = await Axios.get(`/api/users/${accountId}`, {
+      headers: { Authorization: `Bearer ${accountInfo?.email}` },
+    });
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: USER_DETAILS_FAIL, payload: message });
+  }
+};
+
+export const registerout = () => (dispatch) => {
+  localStorage.removeItem('userInfo');
+  localStorage.removeItem('cartItems');
+  localStorage.removeItem('shippingAddress');
+  dispatch({ type: USER_REGISTEROUT });
+  document.location.href = '/register';
+};
+export const registerUser = (userId) => async (dispatch, getState) => {
+  dispatch({ type: USER_DETAILS_REQUEST, payload: userId });
+  const {
+    userRegister: { userInfo },
+  } = getState();
+  try {
+    const { data } = await Axios.get(`/api/users/${userId}`, {
+      headers: { Authorization: `Bearer ${userInfo?.token}` },
+    });
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: USER_DETAILS_FAIL, payload: message });
+  }
+};
+
+
+
+
+
+export const adminout = () => (dispatch) => {
+  localStorage.removeItem('adminInfo');
+  localStorage.removeItem('cartItems');
+  localStorage.removeItem('shippingAddress');
+  dispatch({ type: USER_ADMINOUT });
+  document.location.href = '/adminin';
+};
+export const detailUser = (adminId) => async (dispatch, getState) => {
+  dispatch({ type: USER_DETAILS_REQUEST, payload: adminId });
+  const {
+    userAdminin: { adminInfo },
+  } = getState();
+  try {
+    const { data } = await Axios.get(`/api/admins/${adminId}`, {
+      headers: { Authorization: `Bearer ${adminInfo?.token}` },
+    });
+    dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: USER_DETAILS_FAIL, payload: message });
+  }
+};
+export const accountcreationout = () => (dispatch) => {
+  localStorage.removeItem('accountcreationInfo');
+  localStorage.removeItem('cartItems');
+  localStorage.removeItem('shippingAddress');
+  dispatch({ type: USER_ACCOUNTCREATIONOUT });
+  document.location.href = 'accountcreation';
+};
+export const accountCreation = (accountcreationId) => async (dispatch, getState) => {
+  dispatch({ type: USER_DETAILS_REQUEST, payload: accountcreationId });
+  const {
+    useraccountcreation: {accountcreationInfo},
+  } = getState();
+  try {
+    const { data } = await Axios.get(`/api/users/${accountcreationId}`, {
+      headers: { Authorization: `Bearer ${accountcreationInfo?.token}` },
     });
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (error) {

@@ -124,6 +124,35 @@ export default function ProductListScreen(props) {
                   </td>
                 </tr>
               ))}
+
+
+              {/* {sarees.map((saree) => (
+                <tr key={saree._id}>
+                  <td>{saree._id}</td>
+                  <td>{saree.name}</td>
+                  <td>{saree.price}</td>
+                  <td>{saree.category}</td>
+                  <td>{saree.brand}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="small"
+                      onClick={() =>
+                        navigate(`/saree/${saree._id}/edit`)
+                      }
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      className="small"
+                      onClick={() => deleteHandler(saree)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))} */}
             </tbody>
           </table>
           <div className="row center pagination">

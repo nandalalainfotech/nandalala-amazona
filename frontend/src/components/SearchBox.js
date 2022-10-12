@@ -13,14 +13,14 @@ export default function SearchBox(props) {
       <div className="row">
         <input
           type="text"
-          placeholder="Search for products,brands and more"
           // name="q"
           // id="q"
+          placeholder="Search of products,brands and more"
           onChange={(e) => setName(e.target.value)}
         ></input>
-        <button className="primary" type="submit">
+        {/* <button className="primary" type="submit">
           <i className="fa fa-search"></i>
-        </button>
+        </button> */}
       </div>
     </form>
   );

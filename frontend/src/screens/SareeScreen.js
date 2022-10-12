@@ -81,29 +81,11 @@ export default function SareeScreen() {
                     <Link to="/">go</Link>
                     <div className="row top">
                         <div className="col-2">
-                            <ReactImageMagnify {...{
-                                smallImage: {
-                                    className: "large",
-                                    src: Saree.image,
-                                    width: 300,
-                                    height: 400,
-
-                                },
-                                largeImage: {
-                                    className: "small",
-                                    src: Saree.image,
-                                    width: 600,
-                                    height: 600,
-
-                                },
-
-
-                            }} />
-                            {/* <img
-                                className="large"
+                            <img
+                                className="medium"
                                 src={Saree.image}
                                 alt={Saree.name}
-                            ></img> */}
+                            ></img>
                         </div>
                         <div className="col-1">
                             <ul>

@@ -11,7 +11,11 @@ export default function ProfileScreen() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [sellerName, setSellerName] = useState('');
-  const [sellerLogo, setSellerLogo] = useState('');
+  const [sellerLogo1, setSellerLogo1] = useState('');
+  
+  const [sellerLogo2, setSellerLogo2] = useState('');
+  const [sellerLogo3, setSellerLogo3] = useState('');
+  const [sellerLogo4, setSellerLogo4] = useState('');
   const [sellerDescription, setSellerDescription] = useState('');
 
   const userSignin = useSelector((state) => state.userSignin);
@@ -35,7 +39,10 @@ export default function ProfileScreen() {
       setEmail(user.email);
       if (user.seller) {
         setSellerName(user.seller.name);
-        setSellerLogo(user.seller.logo);
+        setSellerLogo1(user.seller.logo1);
+        setSellerLogo2(user.seller.logo2);
+        setSellerLogo3(user.seller.logo3);
+        setSellerLogo4(user.seller.logo4);
         setSellerDescription(user.seller.description);
       }
     }
@@ -53,7 +60,11 @@ export default function ProfileScreen() {
           email,
           password,
           sellerName,
-          sellerLogo,
+          sellerLogo1,
+          sellerLogo2,
+          sellerLogo3,
+          sellerLogo4,
+        
           sellerDescription,
         })
       );
@@ -132,13 +143,43 @@ export default function ProfileScreen() {
                   ></input>
                 </div>
                 <div>
-                  <label htmlFor="sellerLogo">Seller Logo</label>
+                  <label htmlFor="sellerLogo">Seller Logo1</label>
                   <input
-                    id="sellerLogo"
+                    id="sellerLogo1"
                     type="text"
                     placeholder="Enter Seller Logo"
-                    value={sellerLogo}
-                    onChange={(e) => setSellerLogo(e.target.value)}
+                    value={sellerLogo1}
+                    onChange={(e) => setSellerLogo1(e.target.value)}
+                  ></input>
+                </div>
+                <div>
+                  <label htmlFor="sellerLogo">Seller logo2</label>
+                  <input
+                    id="sellerLogo2"
+                    type="text"
+                    placeholder="Enter Seller Logo"
+                    value={sellerLogo2}
+                    onChange={(e) => setSellerLogo2(e.target.value)}
+                  ></input>
+                </div>
+                <div>
+                  <label htmlFor="sellerLogo">sellerLogo3</label>
+                  <input
+                    id="sellerLogo2"
+                    type="text"
+                    placeholder="Enter Seller Logo"
+                    value={sellerLogo3}
+                    onChange={(e) => setSellerLogo3(e.target.value)}
+                  ></input>
+                </div>
+                <div>
+                  <label htmlFor="sellerLogo">Seller logo4</label>
+                  <input
+                    id="sellerLogo2"
+                    type="text"
+                    placeholder="Enter Seller Logo"
+                    value={sellerLogo4}
+                    onChange={(e) => setSellerLogo4(e.target.value)}
                   ></input>
                 </div>
                 <div>

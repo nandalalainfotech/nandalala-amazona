@@ -94,7 +94,7 @@ export default function DashboardScreen() {
                 ]}
               />
             )}
-          </div>
+          </div> 
         </>
       )}
     </div>
