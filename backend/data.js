@@ -41,7 +41,7 @@ const data = {
         {
             _id: '33',
             name: 'Apoorva Saree',
-            category: 'saree',
+            category: 'sarees',
             image: '/images/p10.jpg',
             price: 220,
             countInStock: 10,
@@ -216,7 +216,7 @@ const data = {
         {
           _id: '8',
           name: 'Silk Saree',
-          category: 'Shirts',
+          category: 'saree',
           image: '/images/p91.jpg',
           price: 100,
           countInStock: 20,
@@ -228,7 +228,7 @@ const data = {
         {
           _id: '9',
           name: 'Apoorva Saree',
-          category: 'Shirts',
+          category: 'saree',
           image: '/images/p10.jpg',
           price: 220,
           countInStock: 0,
@@ -240,7 +240,7 @@ const data = {
         {
           _id: '10',
           name: 'Material Saree',
-          category: 'Pants',
+          category: 'saree',
           image: '/images/sa4.jpg',
           price: 78,
           countInStock: 15,
@@ -252,7 +252,7 @@ const data = {
         {
           _id: '11',
           name: 'Kurtha Saree',
-          category: 'Pants',
+          category: 'saree',
           image: '/images/sa5.jpg',
           price: 65,
           countInStock: 5,
