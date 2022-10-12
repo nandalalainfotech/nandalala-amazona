@@ -9,7 +9,19 @@ import { listTopSellers } from '../actions/userAction';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import { Link } from 'react-router-dom';
-// import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
+// import { useLocation } from '../../node_modules/react-router-dom/index';
+// const navigate = useNavigate();
+// const { search } = useLocation();
+//   const redirectInUrl = new URLSearchParams(search).get('redirect');
+//   const redirect = redirectInUrl ? redirectInUrl : '/accountcreation';
+// // import Saree from '../components/Saree';
+// // import Saree from '../components/Saree';
+// const dispatch = useDispatch();
+// const submitHandler = (e) => {
+//   // e.target.value();
+//   // console.log("e", e)
+//   console.log("email",data);
 
 export default function HomeScreen() {
   const dispatch = useDispatch();
@@ -31,42 +43,68 @@ export default function HomeScreen() {
   return (
     <div>
 
-      <h2>Top Sellers</h2>
-      {loadingSellers ? (
-        <LoadingBox></LoadingBox>
-      ) : errorSellers ? (
-        <MessageBox variant="danger">{errorSellers}</MessageBox>
-      ) : (
-        <>
-          {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
+      <div className='convey'>
+        <h2>Top Sellers</h2>
+        {loadingSellers ? (
+          <LoadingBox></LoadingBox>
+        ) : errorSellers ? (
+          <MessageBox variant="danger">{errorSellers}</MessageBox>
+        ) : (
+          <>
+            {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
 
-          {sellers.map((seller) => (
+            {sellers.map((seller) => (
 
-            <div key={seller._id}>
+              <div key={seller._id}>
 
-              <div className="carousel-item">
+                {/* <div className="carousel-item"> */}
 
                 <Carousel showArrows autoPlay showThumbs={false}>
                   {/* <Carousel showArrows active showThumbs={true}> */}
                   <Link to={`/seller/${seller._id}`}>
-                    <img src={"image/p8.jpg"} alt={seller.seller.name} />
-                    {/* <img className="d-block w-100" src="/image/p11.jpg" alt=""></img>
-                  <img className="d-block w-100" src="/image/p46.jpg" alt=""></img>
-                  <img className="d-block w-100" src="/image/p56.jpg" alt=""></img> */}
+
+
+                    <img className='sellerimg' src={seller.seller.logo1} alt={seller.seller.name} />
+
+                    <img className='sellerimg' src={seller.seller.logo2} alt={seller.seller.name} />
+
+                    <img className='sellerimg' src={seller.seller.logo3} alt={seller.seller.name} />
+
+                    <img className='sellerimg' src={seller.seller.logo4} alt={seller.seller.name} />
+
+
                   </Link>
-                  <Link to={`/seller/${seller._id}`}>
-                    <img src={"image/p91.jpg"} alt={seller.seller.name} />
-                  </Link>
+
+                  {/* <Link to={`/seller/${seller._id}`}>
+
+
+                    <img className='sellerimg' src={seller.seller.logo1} alt={seller.seller.name} />
+
+                    <img className='sellerimg' src={seller.seller.logo2} alt={seller.seller.name} />
+
+                    <img className='sellerimg' src={seller.seller.logo3} alt={seller.seller.name} />
+
+                    <img className='sellerimg' src={seller.seller.logo4} alt={seller.seller.name} />
+
+
+                  </Link> */}
 
                 </Carousel>
-              </div>
-            </div>
-          ))}
 
-        </>
-      )
-      }
-      <h2>Featured Products</h2>
+
+              </div>
+
+              // </div>
+            ))}
+
+          </>
+        )
+        }
+      </div>
+
+
+
+      <h2>Men's collection</h2>
       {
         loading ? (
           <LoadingBox></LoadingBox>
@@ -75,62 +113,339 @@ export default function HomeScreen() {
         ) : (
           <>
             {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
+            {/* {sarees.length === 0 && <MessageBox>No Product Found</MessageBox>} */}
             <div className="row center">
               {products.map((product) => (
                 <Product key={product._id} product={product}></Product>
-                
               ))}
             </div>
+            {/* <div className="row center">
+              {sarees.map((saree) => (
+                <Saree key={saree._id} product={saree}></Saree>
+              ))}
+            </div> */}
+
           </>
         )
       }
+      {/* <h2>Men's collection</h2> */}
+
+      <h2>Woman's collection</h2>
+
+      <div className='armour'>
+        <div className="carousel-item">
+          <Carousel showArrows autoPlay showThumbs={true}>
+            <div className='row'>
+
+              <div className='col-sm-2'>
+                <div class="card1">
+                  <img src="/image/p7.jpg" alt="Avatar" height="300px" />
+
+
+                  <div class="container">
+                    <div class="Name">
+                      <p>purly saree</p>
+                    </div>
+                    <div class="rating">
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star-half-o"></i></span>
+                    </div>
+                    <div class="price">
+                      $580
+                    </div>
+                    {/* <h4><b>John Doe</b></h4>
+                <p>Architect & Engineer</p> */}
+                  </div>
+                </div>
+              </div>
+              <div className='col-sm-2'>
+                <div class="card2">
+                  <img src="/image/p8.jpg" alt="Avatar" height="300px" />
+                  <div class="container">
+                    <div class="Name">
+                      <p>traditional saree</p>
+                    </div>
+                    <div class="rating">
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star-half-o"></i></span>
+                    </div>
+                    <div class="price">
+                      $420
+                    </div>
+                    {/* <h4><b>John Doe</b></h4>
+                <p>Architect & Engineer</p> */}
+                  </div>
+                </div>
+              </div>
+              <div className='col-sm-2'>
+                <div class="card3">
+                  <img src="/image/p9.jpg" alt="Avatar" height="300px" />
+                  <div class="container">
+                    <div class="Name">
+                      <p>maskar saree</p>
+                    </div>
+                    <div class="rating">
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      {/* <span><i class="fa fa-star"></i></span>
+                  <span><i class="fa fa-star"></i></span> */}
+                      <span><i class="fa fa-star-half-o"></i></span>
+                    </div>
+                    <div class="price">
+                      $720
+                    </div>
+                    {/* <h4><b>John Doe</b></h4>
+                <p>Architect & Engineer</p> */}
+                  </div>
+                </div>
+              </div>
+              <div className='col-sm-2'>
+                <div class="card4">
+                  <img src="/image/p91.jpg" alt="Avatar" height="300px" />
+                  <div class="container">
+                    <div class="Name">
+                      <p>Pinaky saree</p>
+                    </div>
+                    <div class="rating">
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      {/* <span><i class="fa fa-star"></i></span> */}
+                      <span><i class="fa fa-star-half-o"></i></span>
+                    </div>
+                    <div class="price">
+                      $920
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div className='row'>
+
+              <div className='col-sm-2'>
+                <div class="card1">
+                  <img src="/image/p10.jpg" alt="Avatar" height="300px" />
+
+
+                  <div class="container">
+                    <div class="Name">
+                      <p>paper saree</p>
+                    </div>
+                    <div class="rating">
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star-half-o"></i></span>
+                    </div>
+                    <div class="price">
+                      $580
+                    </div>
+                    {/* <h4><b>John Doe</b></h4>
+                <p>Architect & Engineer</p> */}
+                  </div>
+                </div>
+              </div>
+              <div className='col-sm-2'>
+                <div class="card2">
+                  <img src="/image/p11.jpg" alt="Avatar" height="300px" />
+                  <div class="container">
+                    <div class="Name">
+                      <p>maska saree</p>
+                    </div>
+                    <div class="rating">
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star-half-o"></i></span>
+                    </div>
+                    <div class="price">
+                      $420
+                    </div>
+                    {/* <h4><b>John Doe</b></h4>
+                <p>Architect & Engineer</p> */}
+                  </div>
+                </div>
+              </div>
+              <div className='col-sm-2'>
+                <div class="card3">
+                  <img src="/image/p12.jpg" alt="Avatar" height="300px" />
+                  <div class="container">
+                    <div class="Name">
+                      <p>arutha saree</p>
+                    </div>
+                    <div class="rating">
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      {/* <span><i class="fa fa-star"></i></span>
+                  <span><i class="fa fa-star"></i></span> */}
+                      <span><i class="fa fa-star-half-o"></i></span>
+                    </div>
+                    <div class="price">
+                      $720
+                    </div>
+                    {/* <h4><b>John Doe</b></h4>
+                <p>Architect & Engineer</p> */}
+                  </div>
+                </div>
+              </div>
+              <div className='col-sm-2'>
+                <div class="card4">
+                  <img src="/image/p45.jpg" alt="Avatar" height="300px" />
+                  <div class="container">
+                    <div class="Name">
+                      <p>jimka saree</p>
+                    </div>
+                    <div class="rating">
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      <span><i class="fa fa-star"></i></span>
+                      {/* <span><i class="fa fa-star"></i></span> */}
+                      <span><i class="fa fa-star-half-o"></i></span>
+                    </div>
+                    <div class="price">
+                      $920
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </Carousel>
+        </div>
+      </div>
+      <h2>Kid's collection</h2>
+      <div className='container'>
+        <div className='row'>
+
+          <div className='col-sm-2'>
+            <div class="card5">
+              <img src="/image/kid5.jpg" alt="Avatar" height="300px" />
+
+
+              <div class="container">
+                <div class="Name">
+                  <p>angel medi</p>
+                </div>
+                <div class="rating">
+                  <span><i class="fa fa-star"></i></span>
+                  <span><i class="fa fa-star"></i></span>
+                  {/* <span><i class="fa fa-star"></i></span>
+                  <span><i class="fa fa-star"></i></span> */}
+                  <span><i class="fa fa-star-half-o"></i></span>
+                </div>
+                <div class="price">
+                  $980
+                </div>
+                {/* <h4><b>John Doe</b></h4>
+                <p>Architect & Engineer</p> */}
+              </div>
+            </div>
+          </div>
+          <div className='col-sm-2'>
+            <div class="card6">
+              <img src="/image/kid2.jpg" alt="Avatar" height="300px" />
+              <div class="container">
+                <div class="Name">
+                  <p>hansa inskert</p>
+                </div>
+                <div class="rating">
+                  <span><i class="fa fa-star"></i></span>
+                  <span><i class="fa fa-star"></i></span>
+                  <span><i class="fa fa-star"></i></span>
+                  <span><i class="fa fa-star"></i></span>
+                  <span><i class="fa fa-star-half-o"></i></span>
+                </div>
+                <div class="price">
+                  $520
+                </div>
+                {/* <h4><b>John Doe</b></h4>
+                <p>Architect & Engineer</p> */}
+              </div>
+            </div>
+          </div>
+          <div className='col-sm-2'>
+            <div class="card7">
+              <img src="/image/kid3.jpg" alt="Avatar" height="300px" />
+              <div class="container">
+                <div class="Name">
+                  <p>umberalla harie</p>
+                </div>
+                <div class="rating">
+                  <span><i class="fa fa-star"></i></span>
+                  <span><i class="fa fa-star"></i></span>
+                  {/* <span><i class="fa fa-star"></i></span>
+                  <span><i class="fa fa-star"></i></span> */}
+                  <span><i class="fa fa-star-half-o"></i></span>
+                </div>
+                <div class="price">
+                  $920
+                </div>
+                {/* <h4><b>John Doe</b></h4>
+                <p>Architect & Engineer</p> */}
+              </div>
+            </div>
+          </div>
+          <div className='col-sm-2'>
+            <div class="card8" >
+              <img src="/image/kid4.jpg" alt="aval8" height="300px" />
+              <div className="container">
+                <div className="Name">
+                  <p>classic medie</p>
+                </div>
+                <div class="rating">
+                  <span><i class="fa fa-star"></i></span>
+                  <span><i class="fa fa-star"></i></span>
+                  <span><i class="fa fa-star"></i></span>
+                  {/* <span><i class="fa fa-star"></i></span> */}
+                  <span><i class="fa fa-star-half-o"></i></span>
+                </div>
+                <div class="price">
+                  $1220
+                </div>
+                {/* <h4><b>John Doe</b></h4>
+                <p>Architect & Engineer</p> */}
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      {/* {
+        loading ? (
+          <LoadingBox></LoadingBox>
+        ) : error ? (
+          <MessageBox variant="danger">{error}</MessageBox>
+        ) : (
+          <>
+            {sarees.length === 0 && <MessageBox>No Product Found</MessageBox>}
+            <div className="row center">
+              {products.map((saree) => (
+                <Saree key={saree._id} saree={saree}></Saree>
+              ))}
+            </div>
+
+
+          </>
+        )
+      } */}
+
+
+
     </div >
+
+
   );
 }
-// import React, { useEffect } from 'react';
-// import 'react-responsive-carousel/lib/styles/carousel.min.css';
-// import { Carousel } from 'react-responsive-carousel';
-// import Product from '../components/Product';
-// import LoadingBox from '../components/LoadingBox';
-// import MessageBox from '../components/MessageBox';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { listProducts } from '../constants/productAction';
-// import { listTopSellers } from '../actions/userAction';
-// export default function HomeScreen() {
-//   const dispatch = useDispatch();
-//   const productList = useSelector((state) => state.productList);
-//   const { loading, error, products } = productList;
-//   useEffect(() => {
-//     dispatch(listTopSellers());
-//     dispatch(listProducts({}));
-//   }, [dispatch]);
-//   return (
-//     <div>
-//       <h2>TopSeller</h2>
-//       <div className="carousel-item">
-//         <Carousel showArrows autoPlay showThumbs={true}>
-//           {/* <img className="d-block w-100" src="/image/p11.jpg" alt=""></img> */}
-//           {/* <img className="d-block w-100" src="/image/p11.jpg" alt="" height="30px"></img> */}
-//           <img className="d-block w-100" src="/image/p11.jpg" alt=""></img>
-//           <img className="d-block w-100" src="/image/p46.jpg" alt=""></img>
-//           <img className="d-block w-100" src="/image/p56.jpg" alt=""></img>
-//         </Carousel>
-//       </div>
-//       <h2>Featured Products</h2>
-//       {loading ? (
-//         <LoadingBox></LoadingBox>
-//       ) : error ? (
-//         <MessageBox variant="danger">{error}</MessageBox>
-//       ) : (
-//         <>
-//           {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
-//           <div className="row center">
-//             {products.map((product) => (
-//               <Product key={product._id} product={product}></Product>
-//             ))}
-//           </div>
-//         </>
-//       )}
-//     </div>
-//   );
-// }

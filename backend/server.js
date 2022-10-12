@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://localhost:27017/amazona', {
-    useNewUrlParser: true
+    useNewUrlParser:true,
 
 });
 
@@ -30,7 +30,7 @@ app.use(cors());
 app.use('/api/uploads', uploadRouter);
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
-app.use('/api/saree', sareeRouter);
+app.use('/api/sarees', sareeRouter);
 app.use('/api/orders', orderRouter);
 app.get('/api/config/paypal', (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
@@ -52,8 +52,11 @@ app.get('*', (req, res) =>
 //   res.send('Server is ready');
 // });
 
-app.use((err, req, res,next) => {
-    res.status(500).send({ message: err.message });
+app.use((err, req, res) => {
+    console.log(req,'req');
+    res.status && res.status (500).send({ message: err.message });
+   
+   
 });
 const port = process.env.PORT || 5000;
 

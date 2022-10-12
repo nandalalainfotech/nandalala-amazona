@@ -14,8 +14,11 @@ export const generateToken = (user) => {
     {
       expiresIn: '30d',
     }
+    
   );
 };
+
+
 
 export const isAuth = (req, res, next) => {
   const authorization = req.headers.authorization;
@@ -44,6 +47,13 @@ export const isAdmin = (req, res, next) => {
     res.status(401).send({ message: 'Invalid Admin Token' });
   }
 };
+export const isAdmins = (req, res, next) => {
+  if (req.user && req.user.isAdmins) {
+    next();
+  } else {
+    res.status(401).send({ message: 'Invalid admins Token' });
+  }
+};
 
 export const isSeller = (req, res, next) => {
   if (req.user && req.user.isSeller) {
@@ -59,6 +69,20 @@ export const isSellerOrAdmin = (req, res, next) => {
     res.status(401).send({ message: 'Invalid Admin/Seller Token' });
   }
 };
+// export const isAccount = (req, res, next) => {
+//   if (req.user && req.user.isAccount) {
+//     next();
+//   } else {
+//     res.status(401).send({ message: 'Invalid Seller Token' });
+//   }
+// };
+// export const isAccount = (req, res) => {
+//   if (req.user && (req.user.isAccount || req.user.isAccount)) {
+//     next();
+//   } else {
+//     res.status(401).send({ message: 'Invalid Account/Account Token' });
+//   }
+// };
 
 // export const mailgun = () =>
 //   mg({

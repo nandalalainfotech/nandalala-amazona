@@ -26,7 +26,7 @@ export default function SellerScreen(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(detailsUser(sellerId));
-    dispatch(listProducts({ sellerId: sellerId }));
+    dispatch(listProducts({ seller: sellerId }));
   }, [dispatch, sellerId]);
   return (
     <div className="row top">
@@ -42,7 +42,28 @@ export default function SellerScreen(props) {
                 <div className="p-1">
                   <img
                     className="small"
-                    src={user.seller.logo}
+                    src={user.seller.logo1}
+                    alt={user.seller.name}
+                  ></img>
+                </div>
+                <div className="p-1">
+                  <img
+                    className="small"
+                    src={user.seller.logo2}
+                    alt={user.seller.name}
+                  ></img>
+                </div>
+                <div className="p-1">
+                  <img
+                    className="small"
+                    src={user.seller.logo3}
+                    alt={user.seller.name}
+                  ></img>
+                </div>
+                <div className="p-1">
+                  <img
+                    className="small"
+                    src={user.seller.logo4}
                     alt={user.seller.name}
                   ></img>
                 </div>

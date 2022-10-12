@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams } from "../../node_modules/react-ro
 import {
   createSaree,
   deleteSaree,
-  listsaree,
+  listSaree,
 } from "../actions/sareeAction";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
@@ -21,7 +21,7 @@ export default function SareeListScreen(props) {
   const { pathname } = useLocation();
   const sellerMode = pathname.indexOf('/seller') >= 0;
   const SareeList = useSelector((state) => state.SareeList);
-  const { loading, error, SAREEs, page, pages } = SareeList;
+  const { loading, error, Sarees, page, pages } = SareeList;
   const SareeCreate = useSelector((state) => state.SareeCreate);
   const {
     loading: loadingCreate,
@@ -48,7 +48,7 @@ export default function SareeListScreen(props) {
       dispatch({ type: SAREE_DELETE_RESET });
     }
     dispatch(
-      listsaree({ seller: sellerMode ? userInfo._id : '', pageNumber })
+      listSaree({ seller: sellerMode ? userInfo._id : '', pageNumber })
     );
   }, [
     createdSaree,
@@ -61,7 +61,7 @@ export default function SareeListScreen(props) {
     pageNumber,
   ]);
   const deleteHandler = (Saree) => {
-    if (window.confirm("Are you sure  to delete?")) {
+    if (window.confirm("Are you sure to delete?")) {
       dispatch(deleteSaree(Saree._id));
     }
   };
@@ -98,7 +98,7 @@ export default function SareeListScreen(props) {
               </tr>
             </thead>
             <tbody>
-              {SAREEs.map((Saree) => (
+              {Sarees.map((Saree) => (
                 <tr key={Saree._id}>
                   <td>{Saree._id}</td>
                   <td>{Saree.name}</td>

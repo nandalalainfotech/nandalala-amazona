@@ -14,10 +14,23 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_REGISTEROUT,
   USER_SIGNIN_FAIL,
   USER_SIGNIN_REQUEST,
   USER_SIGNIN_SUCCESS,
   USER_SIGNOUT,
+  USER_ACCOUNT_FAIL,
+  USER_ACCOUNT_REQUEST,
+  USER_ACCOUNT_SUCCESS,
+  USER_ACCOUNTOUT,
+  USER_ACCOUNTCREATION_FAIL,
+  USER_ACCOUNTCREATION_REQUEST,
+  USER_ACCOUNTCREATION_SUCCESS,
+  USER_ACCOUNTCREATIONOUT,
+  USER_ADMININ_FAIL,
+  USER_ADMININ_REQUEST,
+  USER_ADMININ_SUCCESS,
+  USER_ADMINOUT,
   USER_TOPSELLERS_LIST_FAIL,
   USER_TOPSELLERS_LIST_REQUEST,
   USER_TOPSELLERS_LIST_SUCCESS,
@@ -39,6 +52,8 @@ export const userRegisterReducer = (state = {}, action) => {
       return { loading: false, userInfo: action.payload };
     case USER_REGISTER_FAIL:
       return { loading: false, error: action.payload };
+      case USER_REGISTEROUT:
+      return {};
     default:
       return state;
   }
@@ -54,6 +69,50 @@ export const userSigninReducer = (state = {}, action) => {
     case USER_SIGNIN_FAIL:
       return { loading: false, error: action.payload };
     case USER_SIGNOUT:
+      return {};
+    default:
+      return state;
+  }
+};
+export const userAccountReducer = (state = {}, action) => {
+  
+  switch (action.type) {
+    case USER_ACCOUNT_REQUEST:
+      return { loading: true };
+    case USER_ACCOUNT_SUCCESS:
+      return { loading: false,  userInfo: action.payload };
+    case USER_ACCOUNT_FAIL:
+      return { loading: false, error: action.payload };
+    case USER_ACCOUNTOUT:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const userAccountcreationReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_ACCOUNTCREATION_REQUEST:
+      return { loading: true };
+    case USER_ACCOUNTCREATION_SUCCESS:
+      return { loading: false, userInfo: action.payload };
+    case USER_ACCOUNTCREATION_FAIL:
+      return { loading: false, error: action.payload };
+    case USER_ACCOUNTCREATIONOUT:
+      return {};
+    default:
+      return state;
+  }
+};
+export const userAdmininReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_ADMININ_REQUEST:
+      return { loading: true };
+    case USER_ADMININ_SUCCESS:
+      return { loading: false, userInfo: action.payload };
+    case USER_ADMININ_FAIL:
+      return { loading: false, error: action.payload };
+    case USER_ADMINOUT:
       return {};
     default:
       return state;
