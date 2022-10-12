@@ -1022,7 +1022,7 @@ function App() {
                     </li>
 
                     <li>
-                      <h3> <Link to="/Home Décor" style={{ color: "#c59613" }}>Home Décor</Link> </h3>
+                      <h3> <Link to="/Home Decor" style={{ color: "#c59613" }}>Home Decor</Link> </h3>
 
                       <div className="sub-menu">
                         <li><a href="dffs">
@@ -1039,7 +1039,7 @@ function App() {
                           <Link to="/Mirrors">Mirrors</Link></a>
                         </li>
                         <li><a href="dffs">
-                          <Link to="/Wall Décor">Wall Décor</Link></a>
+                          <Link to="/Wall Decor">Wall Decor</Link></a>
                         </li>
                         <li><a href="dffs">
                           <Link to="/Festive Decor">Festive Decor</Link></a>

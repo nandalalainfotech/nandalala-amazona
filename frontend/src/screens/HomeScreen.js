@@ -10,18 +10,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import { Link } from 'react-router-dom';
 
-// import { useLocation } from '../../node_modules/react-router-dom/index';
-// const navigate = useNavigate();
-// const { search } = useLocation();
-//   const redirectInUrl = new URLSearchParams(search).get('redirect');
-//   const redirect = redirectInUrl ? redirectInUrl : '/accountcreation';
-// // import Saree from '../components/Saree';
-// // import Saree from '../components/Saree';
-// const dispatch = useDispatch();
-// const submitHandler = (e) => {
-//   // e.target.value();
-//   // console.log("e", e)
-//   console.log("email",data);
+
 
 export default function HomeScreen() {
   const dispatch = useDispatch();
@@ -340,8 +329,6 @@ export default function HomeScreen() {
                 <div class="rating">
                   <span><i class="fa fa-star"></i></span>
                   <span><i class="fa fa-star"></i></span>
-                  {/* <span><i class="fa fa-star"></i></span>
-                  <span><i class="fa fa-star"></i></span> */}
                   <span><i class="fa fa-star-half-o"></i></span>
                 </div>
                 <div class="price">
