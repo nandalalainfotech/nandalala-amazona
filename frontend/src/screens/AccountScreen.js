@@ -14,15 +14,7 @@ export default function AccountScreen(props) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [index, setIndex] = useState(0);
-  // const user = {
-  //   email: "test@test.com",
-  //   username: "test123",
-  //   password: "123456"
-  // };
-//   function emailCurrentPage() {
-//     window.location.href = "mailto:?subject=" + document.title + "&body=" + encodeURI(document.location);
-// }
+ 
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get('redirect');
   const redirect = redirectInUrl ? redirectInUrl : '/accountcreation';
@@ -32,18 +24,14 @@ export default function AccountScreen(props) {
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {
-    // e.target.value();
-    // console.log("e", e)
+   
     console.log("email",email);
 
     e.preventDefault();
     dispatch(accountin(email, password));
 
   };
-  // <button handleChange={submitHandler} value={email.value} />
-  // autoComplete ="off",
-  // autoComplete ="nope",
-  // autoComplete={'' + Math.random()}
+  
 
   useEffect(() => {
     console.log("useraccount", data, userInfo);

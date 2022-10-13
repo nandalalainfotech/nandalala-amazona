@@ -216,7 +216,10 @@ userRouter.put(
       user.email = req.body.email || user.email;
       if (user.isSeller) {
         user.seller.name = req.body.sellerName || user.seller.name;
-        user.seller.logo = req.body.sellerLogo || user.seller.logo;
+        user.seller.logo1 = req.body.sellerLogo1 || user.seller.logo1;
+        user.seller.logo2 = req.body.sellerLogo2 || user.seller.logo2;
+        user.seller.logo3 = req.body.sellerLogo3 || user.seller.logo3;
+        user.seller.logo4 = req.body.sellerLogo4 || user.seller.logo4;
         user.seller.description =
           req.body.sellerDescription || user.seller.description;
       }

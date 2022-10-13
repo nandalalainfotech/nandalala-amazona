@@ -4,7 +4,7 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { signout } from "./actions/userAction";
 import { registerout } from "./actions/userAction";
 import { accountout } from "./actions/userAction";
-import { adminout } from "./actions/userAction";
+// import { adminout } from "./actions/userAction";
 import CartScreen from "./screens/CartScreen";
 import HomeScreen from "./screens/HomeScreen";
 import OrderHistoryScreen from "./screens/OrderHistoryScreen";
@@ -68,9 +68,9 @@ function App() {
   // const accountoutHandler = () => {
   //   dispatch(accountout());
   // };
-  const adminoutHandler = () => {
-    dispatch(adminout());
-  };
+  // const adminoutHandler = () => {
+  //   dispatch(adminout());
+  // };
   // console.log={useInfo,"userAdminin"};
   // const  dispatch  = useDispatch();
 
@@ -115,7 +115,7 @@ function App() {
           <div className="run">
 
             {
-              userInfo && userInfo.isSeller && (
+              userInfo && userInfo && (
 
                 <div className="user">
 
@@ -394,7 +394,7 @@ function App() {
               )
             }
             {
-              userInfo && userInfo.isSeller && (
+              userInfo && userInfo && (
                 <div className="user1">
                   <a href="dfs" className="sware"  >
                     <Link to="/">
@@ -627,7 +627,7 @@ function App() {
               )
             }
             {
-              userInfo && userInfo.isSeller && (
+              userInfo && userInfo && (
                 <div className="user2">
                   <a href="dfs" className="activate is-active" active-color="orange">
                     <Link to="\">
@@ -887,7 +887,7 @@ function App() {
               )
             }
             {
-              userInfo && userInfo.isSeller && (
+              userInfo && userInfo && (
                 <div className="user3">
 
                   <a href="dfs" className="living is-active" active-color="orange">
@@ -1179,7 +1179,7 @@ function App() {
               )
             }
             {
-              userInfo && userInfo.isSeller && (
+              userInfo && userInfo && (
                 <div className="user4">
 
                   <a href="dfs" className="beauty is-active" active-color="orange">

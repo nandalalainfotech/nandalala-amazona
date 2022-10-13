@@ -9,7 +9,7 @@ import { createReview, detailsSaree } from "../actions/sareeAction";
 import { SAREE_REVIEW_CREATE_RESET } from "../constants/sareeConstants";
 import data from '../data';
 
-import ReactImageMagnify from 'react-image-magnify';
+// import ReactImageMagnify from 'react-image-magnify';
 
 
 
