@@ -235,8 +235,6 @@ export const registerUser = (userId) => async (dispatch, getState) => {
 
 
 
-
-
 export const adminout = () => (dispatch) => {
   localStorage.removeItem('adminInfo');
   localStorage.removeItem('cartItems');

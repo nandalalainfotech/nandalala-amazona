@@ -64,7 +64,7 @@ export default function HomeScreen() {
 
                   </Link>
 
-                  {/* <Link to={`/seller/${seller._id}`}>
+                  <Link to={`/seller/${seller._id}`}>
 
 
                     <img className='sellerimg' src={seller.seller.logo1} alt={seller.seller.name} />
@@ -76,7 +76,7 @@ export default function HomeScreen() {
                     <img className='sellerimg' src={seller.seller.logo4} alt={seller.seller.name} />
 
 
-                  </Link> */}
+                  </Link>
 
                 </Carousel>
 
@@ -119,7 +119,7 @@ export default function HomeScreen() {
       }
       {/* <h2>Men's collection</h2> */}
 
-      <h2>Woman's collection</h2>
+      <h2>Women's collection</h2>
 
       <div className='armour'>
         <div className="carousel-item">

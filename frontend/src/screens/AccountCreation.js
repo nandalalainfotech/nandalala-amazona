@@ -17,9 +17,9 @@ export default function AccountCreation(props) {
     useEffect(() => {
         const accountInfo = localStorage.getItem('accountInfo')
         if (!accountInfo) {
-            navigate('/account')
+            navigate('')
         }
-    }, [])
+    },)
 
     return (
 
@@ -42,7 +42,7 @@ export default function AccountCreation(props) {
                     onClick={() => navigate("/account")}>Start here</div>
             </> */}
             <div className='round'>
-                <button  onClick={() => navigate("/account")}>Start here</button>
+                <button onClick={() => navigate("/account")}>Start here</button>
 
 
             </div>
