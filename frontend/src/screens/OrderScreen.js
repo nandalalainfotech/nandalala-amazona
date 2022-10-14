@@ -209,7 +209,7 @@ export default function OrderScreen(props) {
                     className="primary block"
                     onClick={deliverHandler}
                   >
-                    Deliver Order
+                    Delivery Order
                   </button>
                 </li>
               )}
