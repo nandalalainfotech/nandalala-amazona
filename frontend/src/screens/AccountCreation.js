@@ -16,7 +16,7 @@ export default function AccountCreation(props) {
     // }
     useEffect(() => {
         const accountInfo = localStorage.getItem('accountInfo')
-        if (!accountInfo) {
+        if (accountInfo) {
             navigate('')
         }
     },)
