@@ -864,7 +864,7 @@ function App() {
                           <Link to="/Pantaloons">Pantaloons</Link></a>
                         </li>
                         <li><a href="dffs">
-                          <Link to="/United Colors Of Benetton Kids">United Colors of Benetton Kids</Link></a>
+                          <Link to="/United Colors Of Benetton Kids">United Colors of BenettonKids</Link></a>
                         </li>
                         <li><a href="dffs">
                           <Link to="/YK">YK</Link></a>
