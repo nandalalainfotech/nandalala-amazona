@@ -4,7 +4,6 @@ import Chart from 'react-google-charts';
 import { summaryOrder } from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-
 export default function DashboardScreen() {
   const orderSummary = useSelector((state) => state.orderSummary);
   const { loading, summary, error } = orderSummary;
@@ -14,7 +13,6 @@ export default function DashboardScreen() {
   }, [dispatch]);
   return (
     <div>
-    
       <div className="row">
         <h1>Dashboard</h1>
       </div>
@@ -41,7 +39,6 @@ export default function DashboardScreen() {
               </div>
               <div className="summary-body">
                 {summary.orders[0] ? summary.orders[0].numOrders : 0}
-                
               </div>
             </li>
             <li>
@@ -90,13 +87,33 @@ export default function DashboardScreen() {
                 data={[
                   ['Category', 'Products'],
                   ...summary.productCategories.map((x) => [x._id, x.count]),
-                  
                 ]}
               />
             )}
-          </div> 
+          </div>
         </>
       )}
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
