@@ -6,7 +6,8 @@ import MessageBox from "../components/MessageBox";
 import Rating from "../components/Rating";
 import { createReview, detailsProduct } from "../actions/productAction";
 import { PRODUCT_REVIEW_CREATE_RESET } from "../constants/productConstants";
-import ModalImage from "react-modal-image";
+// import ModalImage from "react-modal-image";
+import ReactImageMagnify from 'react-image-magnify';
 
 
 export default function ProductScreen(props) {
@@ -73,11 +74,30 @@ export default function ProductScreen(props) {
                 src={product.image}
                 alt={product.name}
               ></img> */}
-              <ModalImage
+              {/* <ModalImage
                 small={product.image}
                 large={product.image}
                 hideDownload={true}
-              />
+              /> */}
+               <ReactImageMagnify {...{
+                smallImage: {
+                  className: "large",
+                  src: product.image,
+                  width: 300,
+                  height: 400,
+
+                },
+                largeImage: {
+                  className: "small",
+                  src: product.image,
+                  width: 600,
+                  height: 600,
+
+                },
+
+
+              }} />
+
             </div>
             <div className="col-1">
               <ul>
