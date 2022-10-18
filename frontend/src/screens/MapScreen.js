@@ -9,7 +9,7 @@ import LoadingBox from "../components/LoadingBox";
 import Axios from "axios";
 import { USER_ADDRESS_MAP_CONFIRM } from "../constants/userConstants";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "../../node_modules/react-router-dom/index";
+import { useNavigate } from "react-router-dom";
 
 const libs = ["places"];
 const defaultLocation = { lat: 45.516, lng: -73.56 };

@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from '../../node_modules/react-router-dom/index';
+import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from '../../node_modules/react-router-dom/dist/index';
+// import { useNavigate } from 'react-router-dom';
 import data from '../data';
 
 // console.log('accountscreen', data);

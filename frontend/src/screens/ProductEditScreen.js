@@ -7,7 +7,7 @@ import MessageBox from "../components/MessageBox";
 import {
   useNavigate,
   useParams,
-} from "../../node_modules/react-router-dom/index";
+} from "react-router-dom";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 
 
