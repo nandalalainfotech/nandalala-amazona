@@ -5,7 +5,7 @@ import { listAddresses } from '../actions/addressActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { ADDRESS_DETAILS_RESET } from '../constants/addressConstants';
-import { useNavigate } from '../../node_modules/react-router-dom/index';
+import {useNavigate } from 'react-router-dom';
 
 export default function AddressListScreen(props) {
     const navigate = useNavigate();
