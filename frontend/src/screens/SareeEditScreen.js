@@ -4,10 +4,8 @@ import Axios from 'axios';
 import { detailsSaree, updateSaree } from "../actions/sareeAction";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import {
-  useNavigate,
-  useParams,
-} from "../../node_modules/react-router-dom/index";
+
+import { useNavigate, useParams } from 'react-router-dom';
 import { SAREE_UPDATE_RESET } from "../constants/sareeConstants";
 
 
